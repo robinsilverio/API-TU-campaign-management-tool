@@ -26,18 +26,29 @@ public class TestUserDetailsServiceImpl {
     private UserDetailsServiceImpl userDetailsService;
     @Mock
     private UserRepository userRepository;
+    private AuthUser expectedUser;
+    private UserDetails actualUserDetails;
+
+    private void arrangeUserAndMockUserRepository() {
+        expectedUser = new AuthUser("T14832", "T14832", "test123", "Super User e-Sales");
+        setUserRepository(userDetailsService, userRepository);
+    }
+
+    private void actUserDetailService() {
+        when(userRepository.findByLogin(expectedUser.getLogin())).thenReturn(Optional.of(expectedUser));
+        actualUserDetails = userDetailsService.loadUserByUsername(expectedUser.getLogin());
+    }
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        this.userDetailsService = new UserDetailsServiceImpl();
+        userDetailsService = new UserDetailsServiceImpl();
     }
 
     @Test
     public void should_check_if_method_findByLogin_is_invoked_one_time_when_retrieving_a_user() {
         // Arrange.
-        AuthUser expectedUser = new AuthUser("T14832", "T14832", "test123", "Super User e-Sales");
-        setUserRepository(userDetailsService, userRepository);
+        arrangeUserAndMockUserRepository();
         // Act.
         when(userRepository.findByLogin(expectedUser.getLogin())).thenReturn(Optional.of(expectedUser));
         UserDetails userDetails = userDetailsService.loadUserByUsername(expectedUser.getLogin());
@@ -48,11 +59,9 @@ public class TestUserDetailsServiceImpl {
     @Test
     public void should_return_a_user_after_retrieving_a_user_containing_a_username() {
         // Arrange.
-        AuthUser expectedUser = new AuthUser("T14832", "T14832", "test123", "Super User e-Sales");
-        setUserRepository(userDetailsService, userRepository);
+        arrangeUserAndMockUserRepository();
         // Act.
-        when(userRepository.findByLogin(expectedUser.getLogin())).thenReturn(Optional.of(expectedUser));
-        UserDetails actualUserDetails = userDetailsService.loadUserByUsername(expectedUser.getLogin());
+        actUserDetailService();
         // Assert.
         assertThat(actualUserDetails.getUsername(), is(expectedUser.getLogin()));
     }
