@@ -28,6 +28,7 @@ public class AuthUser {
     private String password;
 
     @Column(name = "ROLE")
+    @Getter
     @Size(max = 40)
     private String role;
 
