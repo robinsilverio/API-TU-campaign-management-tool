@@ -14,7 +14,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     private String id;
-    private String login;
+    private String username;
     @JsonIgnore
     private String password;
 
@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(String paramId, String paramLogin, String paramPwd,
                            Collection<? extends GrantedAuthority> paramAuthorities) {
         this.id = paramId;
-        this.login = paramLogin;
+        this.username = paramLogin;
         this.password = paramPwd;
         this.authorities = paramAuthorities;
     }
@@ -44,10 +44,13 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
     }
+    public String getId() {
+        return this.id;
+    }
 
     @Override
     public String getUsername() {
-        return this.login;
+        return this.username;
     }
 
     @Override

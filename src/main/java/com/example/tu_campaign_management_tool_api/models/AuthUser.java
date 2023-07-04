@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "\"WEB_CMP_USER\"")
+@Table(name = "WEB_CMP_USER")
 public class AuthUser {
     @Id
     @GeneratedValue
