@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 
 import java.util.Arrays;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +28,7 @@ public class TestJwtUtils {
     private int jwtExpirationMs; // 1 hour
     private UserDetailsImpl userDetailsImpl;
     private String jwtToken;
+    private boolean expectedBoolean;
 
     public void arrangeJwtUtilsMock() {
         this.jwtUtils = new JwtUtilsMock(
@@ -36,6 +39,11 @@ public class TestJwtUtils {
         userDetailsImpl = new UserDetailsImpl(
                 "1", "Robin",
                 "test123", Arrays.asList(() -> "Super User e-Sales"));
+    }
+
+    public void arrangeBooleanAndJwtToken(boolean paramBoolean, String paramJwtToken) {
+        expectedBoolean = paramBoolean;
+        this.jwtToken = paramJwtToken;
     }
 
     private void actGenerateToken() {
@@ -68,5 +76,27 @@ public class TestJwtUtils {
 
         // Assert
         assertEquals(expectedUsername, tokenSubject);
+    }
+
+    @Test
+    public void should_return_true_when_jwtToken_is_valid() {
+        // Arrange
+        arrangeBooleanAndJwtToken(true, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JpbiIsImlhdCI6MTY4ODg0MTk2NywiZXhwIjoxNjg4ODQ1NTY3fQ.LCmVuHCmQDWMCWBDqHrpQsBIeeiHBo-lnQ8C7uAwfrs");
+        arrangeJwtUtilsMock();
+        // Act
+        boolean actualBoolean = this.jwtUtils.validateJwtToken(this.jwtToken);
+        // Assert
+        assertThat(actualBoolean, is(expectedBoolean));
+    }
+
+    @Test
+    public void should_return_false_when_jwtToken_is_invalid() {
+        // Arrange
+        arrangeBooleanAndJwtToken(false, "aaa");
+        arrangeJwtUtilsMock();
+        // Act
+        boolean actualBoolean = this.jwtUtils.validateJwtToken(this.jwtToken);
+        // Assert
+        assertThat(actualBoolean, is(expectedBoolean));
     }
 }
