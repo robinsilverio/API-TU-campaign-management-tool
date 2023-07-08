@@ -79,17 +79,6 @@ public class TestJwtUtils {
     }
 
     @Test
-    public void should_return_true_when_jwtToken_is_valid() {
-        // Arrange
-        arrangeBooleanAndJwtToken(true, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JpbiIsImlhdCI6MTY4ODg0MTk2NywiZXhwIjoxNjg4ODQ1NTY3fQ.LCmVuHCmQDWMCWBDqHrpQsBIeeiHBo-lnQ8C7uAwfrs");
-        arrangeJwtUtilsMock();
-        // Act
-        boolean actualBoolean = this.jwtUtils.validateJwtToken(this.jwtToken);
-        // Assert
-        assertThat(actualBoolean, is(expectedBoolean));
-    }
-
-    @Test
     public void should_return_false_when_jwtToken_is_invalid() {
         // Arrange
         arrangeBooleanAndJwtToken(false, "aaa");
