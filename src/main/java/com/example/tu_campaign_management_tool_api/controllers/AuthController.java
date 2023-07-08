@@ -2,7 +2,6 @@ package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.payload.request.LoginRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.JwtResponse;
-import com.example.tu_campaign_management_tool_api.repositories.UserRepository;
 import com.example.tu_campaign_management_tool_api.security.jwt.JwtUtils;
 import com.example.tu_campaign_management_tool_api.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
@@ -12,7 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,6 +47,11 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 roles));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
+        return ResponseEntity.badRequest().body("Invalid request body: " + ex.getMessage());
     }
 
 }
