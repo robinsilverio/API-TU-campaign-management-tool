@@ -49,9 +49,4 @@ public class AuthController {
                 roles));
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
-        return ResponseEntity.badRequest().body("Invalid request body: " + ex.getMessage());
-    }
-
 }
