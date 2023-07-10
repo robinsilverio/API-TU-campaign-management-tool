@@ -1,0 +1,5 @@
+GET /api/campaign/all HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODg5ODQ3MjgsImV4cCI6MTY4OTEwODE4NX0.pLGINh4KIEbQ5YbBL9T-cg4IYWooTsRpqaOsNB9zyNc
+
