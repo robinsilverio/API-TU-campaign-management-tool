@@ -1,0 +1,13 @@
+package com.example.tu_campaign_management_tool_api.repositories;
+
+import com.example.tu_campaign_management_tool_api.models.Campaign;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface CampaignRepository extends JpaRepository<Campaign, Long> {
+    Optional<Campaign> findCampaignByCampaignId(String campaignId);
+}

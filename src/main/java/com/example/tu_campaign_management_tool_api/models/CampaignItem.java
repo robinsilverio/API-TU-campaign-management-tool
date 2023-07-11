@@ -52,4 +52,13 @@ public class CampaignItem {
 
     @ManyToMany(mappedBy = "campaignItems")
     private List<Campaign> campaigns;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "WEB_CMP_ITEM_DISCOUNT",
+            joinColumns = @JoinColumn(name = "campaign_item_id"),
+            inverseJoinColumns = @JoinColumn(name = "discount_id")
+    )
+    private List<CampaignDiscount> campaignDiscounts;
+
 }
