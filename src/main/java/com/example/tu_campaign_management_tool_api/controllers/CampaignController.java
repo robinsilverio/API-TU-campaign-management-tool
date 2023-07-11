@@ -18,19 +18,19 @@ public class CampaignController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('Super User e-Sales')")
+    @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
     public ResponseEntity<?> createCampaign() {
         return ResponseEntity.ok("Create campaign");
     }
 
     @PutMapping
-    @PreAuthorize("hasRole('Super User e-Sales')")
+    @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
     public ResponseEntity<?> updateCampaign() {
         return ResponseEntity.ok("Update campaign");
     }
 
     @DeleteMapping
-    @PreAuthorize("hasRole('Super User e-Sales')")
+    @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
     public ResponseEntity<?> deleteCampaign() {
         return ResponseEntity.ok("Delete campaign");
     }
