@@ -1,5 +1,6 @@
 package com.example.tu_campaign_management_tool_api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -59,6 +60,7 @@ public class CampaignItem {
             joinColumns = @JoinColumn(name = "campaign_item_id"),
             inverseJoinColumns = @JoinColumn(name = "discount_id")
     )
+    @Getter
     private List<CampaignDiscount> campaignDiscounts;
 
 }

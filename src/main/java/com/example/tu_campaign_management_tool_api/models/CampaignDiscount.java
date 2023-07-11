@@ -2,6 +2,7 @@ package com.example.tu_campaign_management_tool_api.models;
 
 import com.example.tu_campaign_management_tool_api.models.discountTypes.DiscountPercentage;
 import com.example.tu_campaign_management_tool_api.models.discountTypes.DiscountPrice;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -35,7 +36,6 @@ public class CampaignDiscount {
     private String altSkuImgUrl;
 
     @ManyToMany(mappedBy = "campaignDiscounts")
-    @Getter
     private List<CampaignItem> campaignItems;
 
     @ElementCollection
@@ -47,13 +47,11 @@ public class CampaignDiscount {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @Getter
-    @Setter
     private DiscountPrice discountPrice;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @Getter
-    @Setter
     private DiscountPercentage discountPercentage;
 
 }

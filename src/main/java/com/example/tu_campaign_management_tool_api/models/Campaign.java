@@ -26,7 +26,7 @@ public class Campaign {
     @Column(nullable = true)
     @Size(max = 40)
     @Getter
-    private int campaignFolderId;
+    private Integer campaignFolderId;
 
     @NotNull
     @Size(max = 40)
