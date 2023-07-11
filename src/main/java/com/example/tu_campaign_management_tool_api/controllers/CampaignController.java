@@ -23,7 +23,6 @@ public class CampaignController {
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
     public ResponseEntity<?> retrieveCampaigns() {
         List<Campaign> retrievedCampaigns = campaignRepository.findAll();
-        System.out.println(retrievedCampaigns);
         CampaignsMappingResponse response = new CampaignsMappingResponse(retrievedCampaigns);
         return ResponseEntity.ok(response);
     }
