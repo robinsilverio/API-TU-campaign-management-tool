@@ -33,11 +33,6 @@ public class Campaign {
     @Getter
     private String title;
 
-    @Column(nullable = true)
-    @Size(max = 700)
-    @Getter
-    private String campaignUrl;
-
     @NotNull
     @Getter
     private Date startDate;

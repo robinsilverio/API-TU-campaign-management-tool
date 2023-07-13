@@ -36,6 +36,11 @@ public class CampaignItem {
     @Getter
     private String promoImgUrl;
 
+    @Column(nullable = true)
+    @Size(max = 100)
+    @Getter
+    private String promoImgAltText;
+
     @NotNull
     @Size(max = 1)
     @Getter
