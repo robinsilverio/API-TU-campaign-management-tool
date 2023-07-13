@@ -48,7 +48,7 @@ public class TestJwtUtils {
         this.expectedBoolean = paramBoolean;
     }
 
-    private void arrangeActualBoolean(String paramJwtToken) {
+    private void actActualBoolean(String paramJwtToken) {
         this.actualBoolean = this.jwtUtils.validateJwtToken(paramJwtToken);
     }
 
@@ -87,14 +87,32 @@ public class TestJwtUtils {
     }
 
     @Test
+    public void should_return_true_when_jwtToken_is_valid() {
+        // Arrange
+        arrangeExpectedBoolean(true);
+        long expirationMillis = 3600000; // Token will expire after 1 hour
+        Date expirationDate = new Date(System.currentTimeMillis() + expirationMillis);
+        String jwtToken = Jwts.builder()
+                .setExpiration(expirationDate)
+                .signWith(SignatureAlgorithm.HS256, this.jwtSecret)
+                .compact();
+        arrangeJwtUtilsMock();
+        // Act
+        actActualBoolean(jwtToken);
+        // Assert
+        assertThat(this.actualBoolean, is(this.expectedBoolean));
+    }
+
+    @Test
     public void should_return_false_when_jwtToken_is_invalid() {
         // Arrange
         arrangeJwtToken("aaa");
+        arrangeExpectedBoolean(false);
         arrangeJwtUtilsMock();
         // Act
-        arrangeActualBoolean(this.jwtToken);
+        actActualBoolean(this.jwtToken);
         // Assert
-        assertThat(actualBoolean, is(this.expectedBoolean));
+        assertThat(this.actualBoolean, is(this.expectedBoolean));
     }
 
     @Test
@@ -107,16 +125,25 @@ public class TestJwtUtils {
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, this.jwtSecret)
                 .compact();
-        arrangeActualBoolean(expiredToken);
+        actActualBoolean(expiredToken);
         assertThat(this.actualBoolean, is(this.expectedBoolean));
     }
     
     @Test
     public void should_return_false_when_jwtToken_is_empty() {
-        boolean expectedBoolean = false;
+        arrangeExpectedBoolean(false);
         arrangeJwtUtilsMock();
         String emptyToken = "";
-        arrangeActualBoolean(emptyToken);
-        assertThat(this.actualBoolean, is(expectedBoolean));
+        actActualBoolean(emptyToken);
+        assertThat(this.actualBoolean, is(this.expectedBoolean));
+    }
+
+    @Test
+    public void should_return_false_when_format_of_jwtToken_is_unsupported() {
+        arrangeExpectedBoolean(false);
+        arrangeJwtUtilsMock();
+        String emptyToken = "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSJ9.XXXX";
+        actActualBoolean(emptyToken);
+        assertThat(this.actualBoolean, is(this.expectedBoolean));
     }
 }
