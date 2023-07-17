@@ -2,8 +2,10 @@ package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
+import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
 import com.example.tu_campaign_management_tool_api.repositories.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,10 +41,15 @@ public class CampaignController {
         return ResponseEntity.ok("Update campaign");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete/{campaignId}")
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> deleteCampaign() {
-        return ResponseEntity.ok("Delete campaign");
+    public ResponseEntity<?> deleteCampaign(@PathVariable String campaignId) {
+        if (campaignRepository.existsByCampaignId(campaignId)) {
+            campaignRepository.deleteByCampaignId(campaignId);
+            return ResponseEntity.ok(new MessageResponse("Campaign deleted"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Campaign to be deleted not found"));
+        }
     }
 
 }

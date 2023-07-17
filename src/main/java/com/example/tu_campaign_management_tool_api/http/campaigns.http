@@ -1,10 +1,124 @@
 GET /api/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODkwNzQ2MzUsImV4cCI6MTY4OTE5ODA5Mn0.AwWXCC22_0LPMZ4NN8HJFnOjEdUhQgOLlrddcJQ_6YY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk1ODY4NTEsImV4cCI6MTY4OTcxMDMwOH0.-U95lpRniAypQHX6mTJ4-zbG51pgBaULOGR7n3CQPPA
 
 ###
+# getting campaigns being unauthorized.
 GET /api/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFMTIyMDA1IiwiaWF0IjoxNjg5MDc0NTI4LCJleHAiOjE2ODkxOTc5ODV9.e6F50-WFwMeDPReUkLw7l78_ZlxQ3CigBhBR9tCGjfU
+
+###
+# Deleting campaign.
+DELETE /api/campaign/delete/000004 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk1ODY4NTEsImV4cCI6MTY4OTcxMDMwOH0.-U95lpRniAypQHX6mTJ4-zbG51pgBaULOGR7n3CQPPA
+
+###
+# Adding campaign.
+POST /api/campaign/create HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk1ODY4NTEsImV4cCI6MTY4OTcxMDMwOH0.-U95lpRniAypQHX6mTJ4-zbG51pgBaULOGR7n3CQPPA
+
+{
+  "campaignId": "000002",
+  "campaignFolderId": null,
+  "title": "Construction Product Campaign 000001",
+  "startDate": "2023-07-13T15:28:36.000+00:00",
+  "endDate": "2023-08-04T18:11:16.000+00:00",
+  "type": 9001,
+  "promoDescriptionText": "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
+  "promoSummaryText": "Save Big on Construction Products",
+  "ribbonType": "Special Offer",
+  "termsUrl": "abc",
+  "campaignClientGroups": [
+    "Industrie"
+  ],
+  "campaignTags": [],
+  "rootIndicator": true,
+  "filterImgUrl": "filter_image.jpg",
+  "filterOverlayText": "Limited Time Offer!",
+  "promoImgUrl": "promo_image.jpg",
+  "promoImgAltText": "abc",
+  "campaignWebsiteUrl": "https://constructionproductscampaign.com",
+  "campaignWebsiteText": "Learn More",
+  "appTitle": "Construction Products App",
+  "appImageUrl": "app_image.jpg",
+  "appSummary": "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
+  "relativeUrl": null,
+  "campaignItems": [
+    {
+      "campaignItemId": "000001000001",
+      "promoTitle": "Product 000001000001",
+      "promoText": "Promo text for Product 000001000001",
+      "promoImgUrl": "product_image1.jpg",
+      "promoImgAltText": null,
+      "weight": "1",
+      "teaser": "Teaser 1",
+      "extraText": "Extra Text 1",
+      "campaignDiscounts": [
+        {
+          "discountId": "000001000001_D",
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuId": [],
+          "discountPrice": {
+            "discountId": "000001000001_D",
+            "price": 20.0
+          },
+          "discountPercentage": null
+        }
+      ]
+    },
+    {
+      "campaignItemId": "000001000002",
+      "promoTitle": "Product 000001000002",
+      "promoText": "Promo text for Product 000001000002",
+      "promoImgUrl": "product_image2.jpg",
+      "promoImgAltText": null,
+      "weight": "2",
+      "teaser": "Teaser 2",
+      "extraText": "Extra Text 2",
+      "campaignDiscounts": [
+        {
+          "discountId": "000001000002_D",
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuId": [],
+          "discountPrice": {
+            "discountId": "000001000002_D",
+            "price": 20.0
+          },
+          "discountPercentage": null
+        }
+      ]
+    },
+    {
+      "campaignItemId": "000001000003",
+      "promoTitle": "Product 000001000003",
+      "promoText": "Promo text for Product 000001000003",
+      "promoImgUrl": "product_image3.jpg",
+      "promoImgAltText": null,
+      "weight": "3",
+      "teaser": "Teaser 3",
+      "extraText": "Extra Text 3",
+      "campaignDiscounts": [
+        {
+          "discountId": "000001000003_D",
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuId": [],
+          "discountPrice": {
+            "discountId": "000001000003_D",
+            "price": 20.0
+          },
+          "discountPercentage": null
+        }
+      ]
+    }
+  ]
+}
