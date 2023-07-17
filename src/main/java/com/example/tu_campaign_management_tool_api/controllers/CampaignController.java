@@ -1,6 +1,7 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
+import com.example.tu_campaign_management_tool_api.payload.request.CampaignsRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
 import com.example.tu_campaign_management_tool_api.repositories.CampaignRepository;
@@ -39,6 +40,15 @@ public class CampaignController {
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
     public ResponseEntity<?> updateCampaign() {
         return ResponseEntity.ok("Update campaign");
+    }
+
+    @DeleteMapping("/delete/all")
+    @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
+    public ResponseEntity<?> deleteCampaigns(@RequestBody CampaignsRequest campaignsRequest) {
+        for (Campaign campaign : campaignsRequest.getCampaigns()) {
+            campaignRepository.deleteByCampaignId(campaign.getCampaignId());
+        }
+        return ResponseEntity.ok(true);
     }
 
     @DeleteMapping("/delete/{campaignId}")
