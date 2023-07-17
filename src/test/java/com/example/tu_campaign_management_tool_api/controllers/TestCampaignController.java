@@ -1,6 +1,7 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
+import com.example.tu_campaign_management_tool_api.payload.request.CampaignsRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
 import com.example.tu_campaign_management_tool_api.repositories.CampaignRepository;
@@ -36,6 +37,17 @@ public class TestCampaignController {
     private int actualSize;
     private int actualStatusCode;
     private String actualResponseMessage;
+    private Campaign campaignOne;
+    private Campaign campaignTwo;
+    private Campaign campaignThree;
+    private ArrayList<Campaign> campaigns;
+    private CampaignsRequest campaignsRequest;
+    private String expectedResponseMessage;
+
+
+    private void arrangeResponseMessage(String paramResponseMessage) {
+        this.expectedResponseMessage = paramResponseMessage;
+    }
 
     private void arrangeSize(int paramSize) {
         this.expectedSize = paramSize;
@@ -43,6 +55,23 @@ public class TestCampaignController {
 
     private void arrangeCampaignId() {
         this.campaignId = "abcdef";
+    }
+
+    private void arrangeCampaigns() {
+        this.campaignOne = new Campaign();
+        this.campaignTwo = new Campaign();
+        this.campaignThree = new Campaign();
+
+        this.campaignOne.setCampaignId("000001");
+        this.campaignTwo.setCampaignId("000002");
+        this.campaignThree.setCampaignId("000003");
+    }
+
+    private void arrangeCampaignsList() {
+        this.campaigns = new ArrayList<Campaign>(Arrays.asList(this.campaignOne, this.campaignTwo, this.campaignThree));
+    }
+    private void arrangeCampaignsRequest() {
+        this.campaignsRequest = new CampaignsRequest(this.campaigns);
     }
 
     private void stubbingFindAllFunction(List<Campaign> toBeReturnedCampaigns) {
@@ -72,8 +101,14 @@ public class TestCampaignController {
         this.actualStatusCode = responseEntity.getStatusCode().value();
     }
 
-    private void actActualResponseMessage() {
+    private void actActualResponseMessageAfterSingleDeletion() {
         ResponseEntity<?> responseEntity = this.campaignController.deleteCampaign(this.campaignId);
+        MessageResponse messageResponse = (MessageResponse) responseEntity.getBody();
+        actualResponseMessage = messageResponse.getMessage();
+    }
+
+    private void actActualResponseMessageAfterMultipleDeletion() {
+        ResponseEntity<?> responseEntity = this.campaignController.deleteCampaigns(this.campaignsRequest);
         MessageResponse messageResponse = (MessageResponse) responseEntity.getBody();
         actualResponseMessage = messageResponse.getMessage();
     }
@@ -113,6 +148,38 @@ public class TestCampaignController {
     }
 
     @Test
+    public void should_return_statuscode_200_when_a_set_of_campaigns_are_deleted() {
+        // Arrange
+        arrangeCampaigns();
+        arrangeCampaignsList();
+        arrangeCampaignsRequest();
+        // Act
+        for (Campaign campaign : this.campaigns) {
+            doNothing().when(this.repository).deleteByCampaignId(campaign.getCampaignId());
+        }
+        ResponseEntity<?> responseEntity = this.campaignController.deleteCampaigns(this.campaignsRequest);
+        this.actualStatusCode = responseEntity.getStatusCode().value();
+        // Assert
+        assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
+    }
+
+    @Test
+    public void should_return_a_confirmationMessage_when_deleting_multiple_campaigns() {
+        // Arrange
+        arrangeResponseMessage("Selected campaigns are deleted.");
+        arrangeCampaigns();
+        arrangeCampaignsList();
+        arrangeCampaignsRequest();
+        // Act
+        for (Campaign campaign : this.campaigns) {
+            doNothing().when(this.repository).deleteByCampaignId(campaign.getCampaignId());
+        }
+        actActualResponseMessageAfterMultipleDeletion();
+        // Assert
+        assertThat(this.actualResponseMessage, is(this.expectedResponseMessage));
+    }
+
+    @Test
     public void should_return_statusCode_200_when_campaign_is_deleted() {
         // Arrange
         arrangeCampaignId();
@@ -138,26 +205,26 @@ public class TestCampaignController {
     @Test
     public void should_return_confirmation_message_when_campaign_is_deleted() {
         // Arrange
-        String expectedErrorMessage = "Campaign deleted";
+        arrangeResponseMessage("Campaign deleted.");
         arrangeCampaignId();
         // Act
         stubbingFindCampaignByCampaignId(true);
         stubbingDeleteByCampaignId();
-        actActualResponseMessage();
+        actActualResponseMessageAfterSingleDeletion();
         // Assert
-        assertThat(this.actualResponseMessage, is(expectedErrorMessage));
+        assertThat(this.actualResponseMessage, is(expectedResponseMessage));
     }
 
     @Test
     public void should_return_an_errorMessage_when_campaign_does_not_exist_during_deletion() {
         // Arrange
-        String expectedErrorMessage = "Campaign to be deleted not found";
+        arrangeResponseMessage("Campaign to be deleted not found.");
         arrangeCampaignId();
         // Act
         stubbingFindCampaignByCampaignId(false);
-        actActualResponseMessage();
+        actActualResponseMessageAfterSingleDeletion();
         // Assert
-        assertThat(this.actualResponseMessage, is(expectedErrorMessage));
+        assertThat(this.actualResponseMessage, is(expectedResponseMessage));
     }
 
 }

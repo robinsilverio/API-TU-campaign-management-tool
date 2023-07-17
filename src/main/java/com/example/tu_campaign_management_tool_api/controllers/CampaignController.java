@@ -48,7 +48,7 @@ public class CampaignController {
         for (Campaign campaign : campaignsRequest.getCampaigns()) {
             campaignRepository.deleteByCampaignId(campaign.getCampaignId());
         }
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(new MessageResponse("Selected campaigns are deleted."));
     }
 
     @DeleteMapping("/delete/{campaignId}")
@@ -56,9 +56,9 @@ public class CampaignController {
     public ResponseEntity<?> deleteCampaign(@PathVariable String campaignId) {
         if (campaignRepository.existsByCampaignId(campaignId)) {
             campaignRepository.deleteByCampaignId(campaignId);
-            return ResponseEntity.ok(new MessageResponse("Campaign deleted"));
+            return ResponseEntity.ok(new MessageResponse("Campaign deleted."));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Campaign to be deleted not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Campaign to be deleted not found."));
         }
     }
 

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Campaign {
     @GeneratedValue
     @Size(max = 40)
     @Getter
+    @Setter
     private String campaignId;
 
     @Column(nullable = true)
