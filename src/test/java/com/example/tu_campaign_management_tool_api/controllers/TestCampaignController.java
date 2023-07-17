@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -28,7 +29,8 @@ public class TestCampaignController {
 
     @Mock
     private CampaignRepository repository;
-    private int expectedStatusCode;
+    private final int EXPECTED_STATUS_CODE_200 = HttpStatus.OK.value();
+    private final int EXPECTED_STATUS_CODE_404 = HttpStatus.NOT_FOUND.value();
     private String campaignId;
     private int expectedSize;
     private int actualSize;
@@ -37,10 +39,6 @@ public class TestCampaignController {
 
     private void arrangeSize(int paramSize) {
         this.expectedSize = paramSize;
-    }
-
-    private void arrangeStatusCode(int paramStatusCode) {
-        this.expectedStatusCode = paramStatusCode;
     }
 
     private void arrangeCampaignId() {
@@ -83,20 +81,19 @@ public class TestCampaignController {
     @Test
     public void should_return_statusCode_200_when_retrieving_campaigns() {
         // Arrange
-        arrangeStatusCode(200);
         List<Campaign> campaigns = new ArrayList<>(Arrays.asList(new Campaign(), new Campaign(), new Campaign()));
         // Act
         stubbingFindAllFunction(campaigns);
         actStatusCodeOnRetrieval();
         // Assert
-        assertThat(this.actualStatusCode, is(this.expectedStatusCode));
+        assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
     }
 
     @Test
     public void should_return_three_campaigns_when_retrieving() {
         // Arrange
-        arrangeSize(3);
         List<Campaign> campaigns = new ArrayList<>(Arrays.asList(new Campaign(), new Campaign(), new Campaign()));
+        arrangeSize(campaigns.size());
         // Act
         stubbingFindAllFunction(campaigns);
         actActualSize();
@@ -118,26 +115,24 @@ public class TestCampaignController {
     @Test
     public void should_return_statusCode_200_when_campaign_is_deleted() {
         // Arrange
-        arrangeStatusCode(200);
         arrangeCampaignId();
         // Act
         stubbingFindCampaignByCampaignId(true);
         stubbingDeleteByCampaignId();
         actStatusCodeOnDeletion();
         // Assert
-        assertThat(actualStatusCode, is(this.expectedStatusCode));
+        assertThat(actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
     }
 
     @Test
     public void should_return_statusCode_404_when_campaign_does_not_exist_during_deletion() {
         // Arrange
-        arrangeStatusCode(404);
         arrangeCampaignId();
         // Act
         stubbingFindCampaignByCampaignId(false);
         actStatusCodeOnDeletion();
         // Assert
-        assertThat(this.actualStatusCode, is(this.expectedStatusCode));
+        assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_404));
     }
 
     @Test
