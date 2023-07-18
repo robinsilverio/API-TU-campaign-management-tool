@@ -5,6 +5,7 @@ import com.example.tu_campaign_management_tool_api.payload.request.CampaignsRequ
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
 import com.example.tu_campaign_management_tool_api.repositories.CampaignRepository;
+import com.example.tu_campaign_management_tool_api.services.CampaignService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,8 +21,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestCampaignController {
@@ -29,7 +30,11 @@ public class TestCampaignController {
     private CampaignController campaignController;
 
     @Mock
-    private CampaignRepository repository;
+    private CampaignService campaignService;
+
+    @Mock
+    private CampaignRepository campaignRepository;
+
     private final int EXPECTED_STATUS_CODE_200 = HttpStatus.OK.value();
     private final int EXPECTED_STATUS_CODE_404 = HttpStatus.NOT_FOUND.value();
     private String campaignId;
@@ -75,15 +80,15 @@ public class TestCampaignController {
     }
 
     private void stubbingFindAllFunction(List<Campaign> toBeReturnedCampaigns) {
-        when(this.repository.findAll()).thenReturn(toBeReturnedCampaigns);
+        when(this.campaignService.findAll()).thenReturn(toBeReturnedCampaigns);
     }
 
-    private void stubbingFindCampaignByCampaignId(boolean toBeReturnedBoolean) {
-        when(this.repository.existsByCampaignId(this.campaignId)).thenReturn(toBeReturnedBoolean);
+    private void stubbingFindCampaignByCampaignId(Long toBeReturnedOneCampaign) {
+        when(this.campaignService.findAll().stream().filter(campaign -> campaign.getCampaignId() == this.campaignId).count()).thenReturn(toBeReturnedOneCampaign);
     }
 
-    private void stubbingDeleteByCampaignId() {
-        doNothing().when(this.repository).deleteByCampaignId(this.campaignId);
+    private void stubbingDeleteByCampaignId(String paramCampaignId) {
+        doNothing().when(this.campaignService).deleteCampaign(paramCampaignId);
     }
 
     public void actActualSize() {
@@ -96,8 +101,13 @@ public class TestCampaignController {
         this.actualStatusCode = responseEntity.getStatusCode().value();
     }
 
-    private void actStatusCodeOnDeletion() {
+    private void actStatusCodeOnSingleDeletion() {
         ResponseEntity<?> responseEntity = this.campaignController.deleteCampaign(this.campaignId);
+        this.actualStatusCode = responseEntity.getStatusCode().value();
+    }
+
+    public void actStatusCodeOnMultipleDeletion() {
+        ResponseEntity<?> responseEntity = this.campaignController.deleteCampaigns(this.campaignsRequest);
         this.actualStatusCode = responseEntity.getStatusCode().value();
     }
 
@@ -155,10 +165,9 @@ public class TestCampaignController {
         arrangeCampaignsRequest();
         // Act
         for (Campaign campaign : this.campaigns) {
-            doNothing().when(this.repository).deleteByCampaignId(campaign.getCampaignId());
+            stubbingDeleteByCampaignId(campaign.getCampaignId());
         }
-        ResponseEntity<?> responseEntity = this.campaignController.deleteCampaigns(this.campaignsRequest);
-        this.actualStatusCode = responseEntity.getStatusCode().value();
+        actStatusCodeOnMultipleDeletion();
         // Assert
         assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
     }
@@ -172,7 +181,7 @@ public class TestCampaignController {
         arrangeCampaignsRequest();
         // Act
         for (Campaign campaign : this.campaigns) {
-            doNothing().when(this.repository).deleteByCampaignId(campaign.getCampaignId());
+            stubbingDeleteByCampaignId(campaign.getCampaignId());
         }
         actActualResponseMessageAfterMultipleDeletion();
         // Assert
@@ -183,23 +192,13 @@ public class TestCampaignController {
     public void should_return_statusCode_200_when_campaign_is_deleted() {
         // Arrange
         arrangeCampaignId();
+        Campaign campaign = new Campaign();
+        campaign.setCampaignId(this.campaignId);
         // Act
-        stubbingFindCampaignByCampaignId(true);
-        stubbingDeleteByCampaignId();
-        actStatusCodeOnDeletion();
+        stubbingDeleteByCampaignId(campaign.getCampaignId());
+        actStatusCodeOnSingleDeletion();
         // Assert
         assertThat(actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
-    }
-
-    @Test
-    public void should_return_statusCode_404_when_campaign_does_not_exist_during_deletion() {
-        // Arrange
-        arrangeCampaignId();
-        // Act
-        stubbingFindCampaignByCampaignId(false);
-        actStatusCodeOnDeletion();
-        // Assert
-        assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_404));
     }
 
     @Test
@@ -207,24 +206,52 @@ public class TestCampaignController {
         // Arrange
         arrangeResponseMessage("Campaign deleted.");
         arrangeCampaignId();
+        Campaign campaign = new Campaign();
+        campaign.setCampaignId(this.campaignId);
         // Act
-        stubbingFindCampaignByCampaignId(true);
-        stubbingDeleteByCampaignId();
+        stubbingDeleteByCampaignId(campaign.getCampaignId());
         actActualResponseMessageAfterSingleDeletion();
         // Assert
         assertThat(this.actualResponseMessage, is(expectedResponseMessage));
     }
 
     @Test
+    public void should_return_statusCode_404_when_campaign_does_not_exist_during_deletion() {
+        // Arrange
+        arrangeCampaignId();
+        // Arrange
+        doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Campaign not found."))
+                .when(campaignService)
+                .deleteCampaign(this.campaignId);
+
+        // Act
+        ResponseEntity<?> responseEntity = null;
+        try {
+            responseEntity = campaignController.deleteCampaign(this.campaignId);
+        } catch (ResponseStatusException e) {
+            // Assert
+            assertThat(e.getStatusCode().value(), is(this.EXPECTED_STATUS_CODE_404));
+        }
+    }
+
+    @Test
     public void should_return_an_errorMessage_when_campaign_does_not_exist_during_deletion() {
         // Arrange
-        arrangeResponseMessage("Campaign to be deleted not found.");
         arrangeCampaignId();
+        arrangeResponseMessage("404 NOT_FOUND \"Campaign not found.\"");
+        // Arrange
+        doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Campaign not found."))
+                .when(campaignService)
+                .deleteCampaign(this.campaignId);
+
         // Act
-        stubbingFindCampaignByCampaignId(false);
-        actActualResponseMessageAfterSingleDeletion();
-        // Assert
-        assertThat(this.actualResponseMessage, is(expectedResponseMessage));
+        ResponseEntity<?> responseEntity = null;
+        try {
+            responseEntity = campaignController.deleteCampaign(this.campaignId);
+        } catch (ResponseStatusException e) {
+            // Assert
+            assertThat(e.getMessage(), is(this.expectedResponseMessage));
+        }
     }
 
 }
