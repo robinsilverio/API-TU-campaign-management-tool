@@ -1,5 +1,6 @@
 package com.example.tu_campaign_management_tool_api.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
@@ -35,4 +37,16 @@ public class ExceptionHandlerAdvice {
     public ResponseEntity<String> handleRequestMethodNotAllowed(HttpRequestMethodNotSupportedException e) {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body("Error " + HttpStatus.METHOD_NOT_ALLOWED + ": " + e.getMessage());
     }
+    @ExceptionHandler(ResponseStatusException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleResponseStatusException(ResponseStatusException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404 NOT_FOUND - Campaign not found.");
+    }
+
+    @ExceptionHandler(InvalidDefinitionException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleInvalidDefinitionException(InvalidDefinitionException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
+
 }
