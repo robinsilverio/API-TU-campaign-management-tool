@@ -136,7 +136,7 @@ public class Campaign {
 
     @NotNull
     @Getter
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "WEB_CMP_CAMPAIGN_ITEM",
             joinColumns = @JoinColumn(name = "campaign_id"),

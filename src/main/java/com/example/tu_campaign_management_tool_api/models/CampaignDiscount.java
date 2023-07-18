@@ -44,14 +44,16 @@ public class CampaignDiscount {
     @Getter
     private Set<String> skuId;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @Getter
+    @Setter
     private DiscountPrice discountPrice;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @Getter
+    @Setter
     private DiscountPercentage discountPercentage;
 
 }
