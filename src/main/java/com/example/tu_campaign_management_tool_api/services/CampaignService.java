@@ -35,8 +35,8 @@ public class CampaignService {
         return campaignRepository.findAll();
     }
 
-    public void deleteCampaign(String campaignId) {
-        Optional<Campaign> campaignOpt = campaignRepository.findCampaignByCampaignId(campaignId);
+    public void deleteCampaign(String paramCampaignId) {
+        Optional<Campaign> campaignOpt = campaignRepository.findCampaignByCampaignId(paramCampaignId);
         if (!campaignOpt.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campaign not found.");
         }

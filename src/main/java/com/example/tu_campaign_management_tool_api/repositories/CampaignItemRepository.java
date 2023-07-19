@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface CampaignItemRepository extends JpaRepository<CampaignItem, Long> {
-    Optional<CampaignItem> findCampaignItemByCampaignItemId(String campaignItem);
 }

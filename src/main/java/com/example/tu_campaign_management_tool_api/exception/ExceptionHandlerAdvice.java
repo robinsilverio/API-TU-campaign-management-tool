@@ -32,6 +32,12 @@ public class ExceptionHandlerAdvice {
         return ResponseEntity.internalServerError().body("Error " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleNullPointerException(NullPointerException e) {
+        return ResponseEntity.internalServerError().body("Error: " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+    }
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ResponseEntity<String> handleRequestMethodNotAllowed(HttpRequestMethodNotSupportedException e) {

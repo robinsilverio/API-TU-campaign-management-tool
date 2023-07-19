@@ -43,17 +43,17 @@ public class CampaignController {
 
     @DeleteMapping("/delete/selected-campaigns")
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> deleteSelectedCampaigns(@RequestBody SelectedCampaignsRequest selectedCampaignsRequest) {
-        for (Campaign campaign : selectedCampaignsRequest.getSelectedCampaigns()) {
+    public ResponseEntity<?> deleteSelectedCampaigns(@RequestBody SelectedCampaignsRequest paramSelectedCampaignsRequest) {
+        for (Campaign campaign : paramSelectedCampaignsRequest.getSelectedCampaigns()) {
             campaignService.deleteCampaign(campaign.getCampaignId());
         }
         return ResponseEntity.ok(new MessageResponse("Selected campaigns are deleted."));
     }
 
-    @DeleteMapping("/delete/{campaignId}")
+    @DeleteMapping("/delete/{paramCampaignId}")
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> deleteCampaign(@PathVariable String campaignId) {
-        campaignService.deleteCampaign(campaignId);
+    public ResponseEntity<?> deleteCampaign(@PathVariable String paramCampaignId) {
+        campaignService.deleteCampaign(paramCampaignId);
         return ResponseEntity.ok(new MessageResponse("Campaign deleted."));
     }
 

@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface CampaignDiscountRepository extends JpaRepository<CampaignDiscount, Long> {
-    Optional<CampaignDiscount> findCampaignDiscountByDiscountId(String discountId);
 }
