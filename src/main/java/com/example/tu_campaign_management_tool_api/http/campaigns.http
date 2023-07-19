@@ -19,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk1O
 
 ###
 # Deleting all campaigns
-DELETE /api/campaign/delete/all
+DELETE /api/campaign/delete/selected-campaigns
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk1ODY4NTEsImV4cCI6MTY4OTcxMDMwOH0.-U95lpRniAypQHX6mTJ4-zbG51pgBaULOGR7n3CQPPA

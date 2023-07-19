@@ -1,26 +1,17 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
-import com.example.tu_campaign_management_tool_api.models.CampaignDiscount;
-import com.example.tu_campaign_management_tool_api.models.CampaignItem;
-import com.example.tu_campaign_management_tool_api.payload.request.CampaignsRequest;
+import com.example.tu_campaign_management_tool_api.payload.request.SelectedCampaignsRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
-import com.example.tu_campaign_management_tool_api.repositories.*;
 import com.example.tu_campaign_management_tool_api.services.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jdbc.core.JdbcAggregateOperations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -50,10 +41,10 @@ public class CampaignController {
         return ResponseEntity.ok("Update campaign");
     }
 
-    @DeleteMapping("/delete/all")
+    @DeleteMapping("/delete/selected-campaigns")
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> deleteCampaigns(@RequestBody CampaignsRequest campaignsRequest) {
-        for (Campaign campaign : campaignsRequest.getCampaigns()) {
+    public ResponseEntity<?> deleteSelectedCampaigns(@RequestBody SelectedCampaignsRequest selectedCampaignsRequest) {
+        for (Campaign campaign : selectedCampaignsRequest.getSelectedCampaigns()) {
             campaignService.deleteCampaign(campaign.getCampaignId());
         }
         return ResponseEntity.ok(new MessageResponse("Selected campaigns are deleted."));

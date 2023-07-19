@@ -9,7 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampaignsRequest {
+public class SelectedCampaignsRequest {
     @Getter
-    private List<Campaign> campaigns;
+    private List<Campaign> selectedCampaigns;
 }

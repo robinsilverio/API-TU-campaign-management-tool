@@ -1,7 +1,7 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
-import com.example.tu_campaign_management_tool_api.payload.request.CampaignsRequest;
+import com.example.tu_campaign_management_tool_api.payload.request.SelectedCampaignsRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
 import com.example.tu_campaign_management_tool_api.repositories.CampaignRepository;
@@ -46,7 +46,7 @@ public class TestCampaignController {
     private Campaign campaignTwo;
     private Campaign campaignThree;
     private ArrayList<Campaign> campaigns;
-    private CampaignsRequest campaignsRequest;
+    private SelectedCampaignsRequest selectedCampaignsRequest;
     private String expectedResponseMessage;
 
 
@@ -76,7 +76,7 @@ public class TestCampaignController {
         this.campaigns = new ArrayList<Campaign>(Arrays.asList(this.campaignOne, this.campaignTwo, this.campaignThree));
     }
     private void arrangeCampaignsRequest() {
-        this.campaignsRequest = new CampaignsRequest(this.campaigns);
+        this.selectedCampaignsRequest = new SelectedCampaignsRequest(this.campaigns);
     }
 
     private void stubbingFindAllFunction(List<Campaign> toBeReturnedCampaigns) {
@@ -107,7 +107,7 @@ public class TestCampaignController {
     }
 
     public void actStatusCodeOnMultipleDeletion() {
-        ResponseEntity<?> responseEntity = this.campaignController.deleteCampaigns(this.campaignsRequest);
+        ResponseEntity<?> responseEntity = this.campaignController.deleteSelectedCampaigns(this.selectedCampaignsRequest);
         this.actualStatusCode = responseEntity.getStatusCode().value();
     }
 
@@ -118,7 +118,7 @@ public class TestCampaignController {
     }
 
     private void actActualResponseMessageAfterMultipleDeletion() {
-        ResponseEntity<?> responseEntity = this.campaignController.deleteCampaigns(this.campaignsRequest);
+        ResponseEntity<?> responseEntity = this.campaignController.deleteSelectedCampaigns(this.selectedCampaignsRequest);
         MessageResponse messageResponse = (MessageResponse) responseEntity.getBody();
         actualResponseMessage = messageResponse.getMessage();
     }
