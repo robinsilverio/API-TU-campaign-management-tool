@@ -1,6 +1,7 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
+import com.example.tu_campaign_management_tool_api.payload.request.CampaignRequest;
 import com.example.tu_campaign_management_tool_api.payload.request.SelectedCampaignsRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
@@ -31,7 +32,8 @@ public class CampaignController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> createCampaign() {
+    public ResponseEntity<?> createCampaign(@RequestBody CampaignRequest paramCampaignRequest) {
+        campaignService.createCampaign(paramCampaignRequest);
         return ResponseEntity.ok("Create campaign");
     }
 

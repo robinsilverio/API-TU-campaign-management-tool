@@ -3,6 +3,7 @@ package com.example.tu_campaign_management_tool_api.services;
 import com.example.tu_campaign_management_tool_api.models.Campaign;
 import com.example.tu_campaign_management_tool_api.models.CampaignDiscount;
 import com.example.tu_campaign_management_tool_api.models.CampaignItem;
+import com.example.tu_campaign_management_tool_api.payload.request.CampaignRequest;
 import com.example.tu_campaign_management_tool_api.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,10 @@ public class CampaignService {
 
     public List<Campaign> findAll() {
         return campaignRepository.findAll();
+    }
+
+    public void createCampaign(CampaignRequest paramCampaignRequest) {
+
     }
 
     public void deleteCampaign(String paramCampaignId) {
