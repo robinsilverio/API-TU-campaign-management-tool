@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -59,6 +60,7 @@ public class CampaignItem {
     private String extraText;
 
     @ManyToMany(mappedBy = "campaignItems", cascade = CascadeType.REMOVE)
+    @Setter
     private List<Campaign> campaigns;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -68,6 +70,7 @@ public class CampaignItem {
             inverseJoinColumns = @JoinColumn(name = "discount_id")
     )
     @Getter
+    @Setter
     private List<CampaignDiscount> campaignDiscounts;
 
 }

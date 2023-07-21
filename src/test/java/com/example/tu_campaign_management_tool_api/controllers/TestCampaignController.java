@@ -1,6 +1,9 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.models.Campaign;
+import com.example.tu_campaign_management_tool_api.models.CampaignDiscount;
+import com.example.tu_campaign_management_tool_api.models.CampaignItem;
+import com.example.tu_campaign_management_tool_api.models.discountTypes.DiscountPrice;
 import com.example.tu_campaign_management_tool_api.payload.request.SelectedCampaignsRequest;
 import com.example.tu_campaign_management_tool_api.payload.responses.CampaignsMappingResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.MessageResponse;
@@ -15,9 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -155,6 +158,66 @@ public class TestCampaignController {
         actActualSize();
         // Assert
         assertThat(actualSize, is(expectedSize));
+    }
+
+    @Test
+    public void should_return_statusCode_200_when_a_campaign_is_added() {
+        // Arrange.
+        CampaignItem campaignItem = new CampaignItem(
+                null,
+                "Product 000001000001",
+                "Promo text for Product 000001000001",
+                "product_image1.jpg",
+                null,
+                "M",
+                "Teaser 1",
+                "Extra Text 1",
+                null,
+                null
+        );
+        CampaignDiscount campaignDiscount = new CampaignDiscount(
+                null,
+                5,
+                null,
+                Arrays.asList(campaignItem),
+                new HashSet<>(Arrays.asList("00032123", "2239221")),
+                null,
+                null
+        );
+        DiscountPrice discountPrice = new DiscountPrice(null, campaignDiscount, 20.0);
+        campaignDiscount.setDiscountPrice(discountPrice);
+
+        Campaign campaign = new Campaign(null, null, "Construction Product Campaign 000003",
+                Date.from(LocalDateTime.of(2023, 7, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
+                Date.from(LocalDateTime.of(2023, 8, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
+                9001,
+                "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
+                "Save Big on Construction Products",
+                "Special Offer",
+                "abc",
+                new HashSet<>(Arrays.asList("Industrie")),
+                new HashSet<>(),
+                true,
+                "filter_image.jpg",
+                "Limited Time Offer!",
+                "promo_image.jpg",
+                "abc",
+                "https://constructionproductscampaign.com",
+                "Learn More",
+                "Construction Products App",
+                "app_image.jpg",
+                "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
+                null,
+                Arrays.asList()
+        );
+        campaignItem.setCampaigns(Arrays.asList(campaign));
+        campaignItem.setCampaignDiscounts(Arrays.asList(campaignDiscount));
+        // Act
+        doNothing().when(this.campaignService).createCampaign(campaign);
+        ResponseEntity<?> response = this.campaignController.createCampaign(campaign);
+        this.actualStatusCode = response.getStatusCode().value();
+        // Assert
+        assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
     }
 
     @Test
