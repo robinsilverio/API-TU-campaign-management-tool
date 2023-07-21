@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 import java.util.Set;
@@ -20,13 +21,13 @@ import java.util.Set;
 public class CampaignDiscount {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "custom-id-generator")
+    @GenericGenerator(name = "custom-id-generator", strategy = "com.example.tu_campaign_management_tool_api.generator.NextIdGenerator")
     @Size(max = 40)
     @Getter
     private String discountId;
 
     @Column(nullable = true)
-    @Size(max = 10)
     @Getter
     private int tuPoints;
 
@@ -44,13 +45,13 @@ public class CampaignDiscount {
     @Getter
     private Set<String> skuId;
 
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @Getter
     @Setter
     private DiscountPrice discountPrice;
 
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @Getter
     @Setter

@@ -32,7 +32,7 @@ public class CampaignController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> createCampaign(@RequestBody CampaignRequest paramCampaignRequest) {
+    public ResponseEntity<?> createCampaign(@RequestBody Campaign paramCampaignRequest) {
         campaignService.createCampaign(paramCampaignRequest);
         return ResponseEntity.ok("Create campaign");
     }

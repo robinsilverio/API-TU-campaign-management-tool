@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CampaignItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "custom-id-generator")
+    @GenericGenerator(name = "custom-id-generator", strategy = "com.example.tu_campaign_management_tool_api.generator.NextIdGenerator")
     @Size(max = 40)
     @Getter
     private String campaignItemId;
@@ -59,7 +61,7 @@ public class CampaignItem {
     @ManyToMany(mappedBy = "campaignItems", cascade = CascadeType.REMOVE)
     private List<Campaign> campaigns;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "WEB_CMP_ITEM_DISCOUNT",
             joinColumns = @JoinColumn(name = "campaign_item_id"),

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 import java.util.List;
@@ -19,14 +20,14 @@ import java.util.Set;
 public class Campaign {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "custom-id-generator")
+    @GenericGenerator(name = "custom-id-generator", strategy = "com.example.tu_campaign_management_tool_api.generator.NextIdGenerator")
     @Size(max = 40)
     @Getter
     @Setter
     private String campaignId;
 
     @Column(nullable = true)
-    @Size(max = 40)
     @Getter
     private Integer campaignFolderId;
 
@@ -43,7 +44,6 @@ public class Campaign {
     @Getter
     private Date endDate;
 
-    @Size(max = 38)
     @Getter
     @Column(name = "type", columnDefinition = "VARCHAR(255) DEFAULT '9001'")
     private int type;
@@ -136,7 +136,7 @@ public class Campaign {
 
     @NotNull
     @Getter
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "WEB_CMP_CAMPAIGN_ITEM",
             joinColumns = @JoinColumn(name = "campaign_id"),
