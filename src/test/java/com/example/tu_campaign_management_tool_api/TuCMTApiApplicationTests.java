@@ -6,6 +6,7 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @SelectPackages({
         "com.example.tu_campaign_management_tool_api.authServices",
+        "com.example.tu_campaign_management_tool_api.generator",
         "com.example.tu_campaign_management_tool_api.controllers",
         "com.example.tu_campaign_management_tool_api.jwtUtils"
 })
