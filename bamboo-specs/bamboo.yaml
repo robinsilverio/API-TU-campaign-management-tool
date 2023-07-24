@@ -1,6 +1,3 @@
 # https://docks.atlassian.com/bamboo-specs-docs/latest
 ---
 !include 'build/plan.yml'
-
----
-!include 'deployment/plan.yml'
