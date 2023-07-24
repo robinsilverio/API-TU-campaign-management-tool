@@ -5,11 +5,8 @@ plan:
   name: Build and package TU Campaign Management Tool via Spec
 stages:
   - Checkout and build code stage:
-      manual: false
-      final: false
       jobs:
-        BuildAndTest:
-          key: BT
+        - name: BuildAndTest
           tasks:
             - script:
                 - cd campaign-admin-backend
