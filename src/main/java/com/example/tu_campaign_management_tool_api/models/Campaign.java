@@ -45,7 +45,7 @@ public class Campaign {
     private Date endDate;
 
     @Getter
-    @Column(name = "type", columnDefinition = "VARCHAR(255) DEFAULT '9001'")
+    @Column(name = "type", length = 38)
     private int type;
 
     @NotNull
