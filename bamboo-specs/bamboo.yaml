@@ -1,8 +1,8 @@
-version: 3.0
+version: 2
 plan:
-  project-key: TCMT-project
-  key: TCMT-Plan
-  name: TU Campaign Management Tool
+  project-key: TCMTPROJECT
+  key: TCMTPLAN
+  name: Build And Package TU Campaign Management Tool
 
 stages:
   - name: Build
