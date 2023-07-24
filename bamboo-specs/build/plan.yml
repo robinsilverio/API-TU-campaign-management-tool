@@ -1,0 +1,21 @@
+version: 2
+plan:
+  project-key: PROJECTKEY
+  key: BAPTCMT
+  name: Build and package TU Campaign Management Tool via Spec
+stages:
+  - Checkout and build code stage:
+      manual: false
+      final: false
+      jobs:
+        - BuildAndTest
+BuildAndTest:
+  key: BT
+  tasks:
+    - script:
+        interpreter:
+          shell: /usr/bin/env bash
+        location:
+          inlinetext: |
+            cd campaign-admin-backend
+            mvn clean install
