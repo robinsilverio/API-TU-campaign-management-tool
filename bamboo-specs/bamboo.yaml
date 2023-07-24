@@ -1,0 +1,21 @@
+version: 3.0
+plan:
+  project-key: TCMT-project
+  key: TCMT-Plan
+  name: TU Campaign Management Tool
+
+stages:
+  - name: Build
+    jobs:
+      - name: Build and Test
+        key: BuildAndTest
+        tasks:
+          - script:
+              type: SCRIPT
+              description: Build and test the Maven project
+              interpreter:
+                shell: /usr/bin/env bash
+              location:
+                inlinetext: |
+                  cd campaign-admin-backend
+                  mvn clean install
