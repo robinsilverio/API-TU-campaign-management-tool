@@ -4,15 +4,13 @@ plan:
   key: BAPTCMT
   name: Build and package TU Campaign Management Tool via Spec
 stages:
-  - Checkout and build code stage:
-      manual: false
-      final: false
-      jobs:
-        - job: BuildAndTest
-          key: BT
-          tasks:
-            - script:
-                interpreter: /usr/bin/env bash
-                body: |
-                  cd campaign-admin-backend
-                  mvn clean install
+  - name: Checkout and build code stage
+    manual: false
+    final: false
+    jobs:
+      - name: BuildAndTest
+        key: BT
+        tasks:
+          - script:
+              - cd campaign-admin-backend
+              - mvn clean install
