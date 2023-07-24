@@ -8,11 +8,11 @@ stages:
       manual: false
       final: false
       jobs:
-        - BuildAndTest:
-            key: BT
-            tasks:
-              - script:
-                  - interpreter: /usr/bin/env bash
-                  - scriptBody: |
-                      cd campaign-admin-backend
-                      mvn clean install
+        - job: BuildAndTest
+          key: BT
+          tasks:
+            - script:
+                interpreter: /usr/bin/env bash
+                body: |
+                  cd campaign-admin-backend
+                  mvn clean install
