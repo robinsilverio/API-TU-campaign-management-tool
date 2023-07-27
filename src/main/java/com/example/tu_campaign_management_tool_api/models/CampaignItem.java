@@ -1,6 +1,5 @@
 package com.example.tu_campaign_management_tool_api.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -49,12 +48,12 @@ public class CampaignItem {
     @Getter
     private String weight;
 
-    @NotNull
+    @Column(nullable = true)
     @Size(max = 20)
     @Getter
     private String teaser;
 
-    @NotNull
+    @Column(nullable = true)
     @Size(max = 15)
     @Getter
     private String extraText;
@@ -71,6 +70,6 @@ public class CampaignItem {
     )
     @Getter
     @Setter
-    private List<CampaignDiscount> campaignDiscounts;
+    private List<CampaignDiscount> campaignItemDiscounts;
 
 }

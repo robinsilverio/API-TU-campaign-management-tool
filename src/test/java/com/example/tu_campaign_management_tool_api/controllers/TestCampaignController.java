@@ -211,9 +211,9 @@ public class TestCampaignController {
                 Arrays.asList()
         );
         campaignItem.setCampaigns(Arrays.asList(campaign));
-        campaignItem.setCampaignDiscounts(Arrays.asList(campaignDiscount));
+        campaignItem.setCampaignItemDiscounts(Arrays.asList(campaignDiscount));
         // Act
-        doNothing().when(this.campaignService).createCampaign(campaign);
+        when(this.campaignService.createCampaign(campaign)).thenReturn(campaign);
         ResponseEntity<?> response = this.campaignController.createCampaign(campaign);
         this.actualStatusCode = response.getStatusCode().value();
         // Assert

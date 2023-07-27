@@ -3,7 +3,7 @@
 POST /api/campaign HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5MzY1NDMsImV4cCI6MTY5MDA2MDAwMH0.OWGkOP9GV7RQAa_pdPJ2xQXmHqrNQz5TO5R4jVhgNuM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA0NTM2NDAsImV4cCI6MTY5MDU3NzA5Nn0.swDpqym7pTy3PHQpzrLtT2cbBI0YJ504C2L7s-p8H6Y
 
 {
   "campaignId": null,
@@ -22,7 +22,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5M
   "campaignTags": ["TestTag"],
   "rootIndicator": true,
   "filterImgUrl": "filter_image.jpg",
-  "filterOverlayText": "Limited Time Offer!",
+  "filterOverlayText": "filter_image",
   "promoImgUrl": "promo_image.jpg",
   "promoImgAltText": "abc",
   "campaignWebsiteUrl": "https://constructionproductscampaign.com",

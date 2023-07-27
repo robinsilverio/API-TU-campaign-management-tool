@@ -1,6 +1,7 @@
 package com.example.tu_campaign_management_tool_api.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
@@ -35,6 +38,19 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleNullPointerException(NullPointerException e) {
+        return ResponseEntity.internalServerError().body("Error: " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+        e.printStackTrace();
+        return ResponseEntity.internalServerError().body("Error: " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleSqlConstraintViolationException(SQLIntegrityConstraintViolationException e) {
         return ResponseEntity.internalServerError().body("Error: " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
     }
 

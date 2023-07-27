@@ -41,7 +41,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5M
       "weight": "1",
       "teaser": "Teaser 1",
       "extraText": "Extra Text 1",
-      "campaignDiscounts": [
+      "campaignItemDiscounts": [
       ]
     }
   ]

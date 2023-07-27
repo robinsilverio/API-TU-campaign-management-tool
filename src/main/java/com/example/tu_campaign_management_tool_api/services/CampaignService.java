@@ -35,8 +35,8 @@ public class CampaignService {
         return campaignRepository.findAll();
     }
 
-    public void createCampaign(Campaign paramCampaignRequest) {
-        campaignRepository.save(paramCampaignRequest);
+    public Campaign createCampaign(Campaign paramCampaignRequest) {
+        return campaignRepository.save(paramCampaignRequest);
     }
 
     public void deleteCampaign(String paramCampaignId) {
@@ -54,10 +54,10 @@ public class CampaignService {
         campaignRepository.delete(campaign); // Deleting the campaign
 
         campaignItemsBelongingToACampaign.forEach(campaignItem -> {
-            List<CampaignDiscount> campaignDiscountsBelongingToCampaignItem = List.copyOf(campaignItem.getCampaignDiscounts());
-            campaignItem.getCampaignDiscounts().clear();
+            List<CampaignDiscount> campaignItemDiscountsBelongingToCampaignItem = List.copyOf(campaignItem.getCampaignItemDiscounts());
+            campaignItem.getCampaignItemDiscounts().clear();
             campaignItemRepository.delete(campaignItem);
-            campaignDiscountsBelongingToCampaignItem.forEach(campaignDiscount -> {
+            campaignItemDiscountsBelongingToCampaignItem.forEach(campaignDiscount -> {
                 if (campaignDiscount.getDiscountPrice() != null) {
                     System.out.println("DiscountPrice is available "  + campaignDiscount.getDiscountPrice());
                     campaignDiscountPriceRepository.delete(campaignDiscount.getDiscountPrice());

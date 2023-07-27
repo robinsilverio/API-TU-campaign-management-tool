@@ -36,7 +36,7 @@ public class CampaignDiscount {
     @Getter
     private String altSkuImgUrl;
 
-    @ManyToMany(mappedBy = "campaignDiscounts")
+    @ManyToMany(mappedBy = "campaignItemDiscounts")
     private List<CampaignItem> campaignItems;
 
     @ElementCollection

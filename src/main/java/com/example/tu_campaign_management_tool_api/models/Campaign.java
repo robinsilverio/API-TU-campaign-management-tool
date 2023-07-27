@@ -84,12 +84,12 @@ public class Campaign {
     @Getter
     private boolean rootIndicator;
 
-    @NotNull
+    @Column(nullable = true)
     @Size(max = 700)
     @Getter
     private String filterImgUrl;
 
-    @NotNull
+    @Column(nullable = true)
     @Size(max = 20)
     @Getter
     private String filterOverlayText;

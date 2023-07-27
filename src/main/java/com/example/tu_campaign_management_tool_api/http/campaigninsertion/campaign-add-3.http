@@ -3,7 +3,7 @@
 POST /api/campaign HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5MzY1NDMsImV4cCI6MTY5MDA2MDAwMH0.OWGkOP9GV7RQAa_pdPJ2xQXmHqrNQz5TO5R4jVhgNuM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA0NTIwMTMsImV4cCI6MTY5MDU3NTQ2OX0.QVRhUNGRJVUNk6wVayjZI--RAz4ptvOMYD0r7v_rcN8
 
 {
   "campaignId": null,
@@ -41,7 +41,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5M
       "weight": "1",
       "teaser": "Teaser 1",
       "extraText": "Extra Text 1",
-      "campaignDiscounts": [
+      "campaignItemDiscounts": [
         {
           "discountId": null,
           "tuPoints": 5,

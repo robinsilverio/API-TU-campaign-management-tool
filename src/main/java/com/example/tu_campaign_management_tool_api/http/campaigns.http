@@ -62,7 +62,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "1",
           "teaser": "Teaser 1",
           "extraText": "Extra Text 1",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000001000001_D",
               "tuPoints": 5,
@@ -85,7 +85,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "2",
           "teaser": "Teaser 2",
           "extraText": "Extra Text 2",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000001000002_D",
               "tuPoints": 5,
@@ -108,7 +108,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "3",
           "teaser": "Teaser 3",
           "extraText": "Extra Text 3",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000001000003_D",
               "tuPoints": 5,
@@ -163,7 +163,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "1",
           "teaser": "Teaser 1",
           "extraText": "Extra Text 1",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000002000001_D",
               "tuPoints": 5,
@@ -186,7 +186,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "2",
           "teaser": "Teaser 2",
           "extraText": "Extra Text 2",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000002000002_D",
               "tuPoints": 5,
@@ -209,7 +209,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "3",
           "teaser": "Teaser 3",
           "extraText": "Extra Text 3",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000002000003_D",
               "tuPoints": 5,
@@ -261,7 +261,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "1",
           "teaser": "Teaser 1",
           "extraText": "Extra Text 1",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000003000001_D",
               "tuPoints": 5,
@@ -284,7 +284,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "2",
           "teaser": "Teaser 2",
           "extraText": "Extra Text 2",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000003000002_D",
               "tuPoints": 5,
@@ -307,7 +307,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3N
           "weight": "3",
           "teaser": "Teaser 3",
           "extraText": "Extra Text 3",
-          "campaignDiscounts": [
+          "campaignItemDiscounts": [
             {
               "discountId": "000003000003_D",
               "tuPoints": 5,
