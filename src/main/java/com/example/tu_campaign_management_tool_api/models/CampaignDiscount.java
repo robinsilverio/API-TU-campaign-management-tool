@@ -43,7 +43,7 @@ public class CampaignDiscount {
     @CollectionTable(name = "WEB_CMP_DISCOUNT_SKU", joinColumns = @JoinColumn(name = "discount_id"))
     @Column(name = "sku_id")
     @Getter
-    private Set<String> skuId;
+    private Set<String> skuIds;
 
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @PrimaryKeyJoinColumn

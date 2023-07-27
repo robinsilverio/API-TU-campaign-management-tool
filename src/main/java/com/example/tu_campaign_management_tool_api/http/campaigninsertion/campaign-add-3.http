@@ -46,7 +46,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA0N
           "discountId": null,
           "tuPoints": 5,
           "altSkuImgUrl": null,
-          "skuId": ["00032123", "2239221"],
+          "skuIds": ["00032123", "2239221"],
           "discountPrice": {
             "discountId": null,
             "price": 20.0
