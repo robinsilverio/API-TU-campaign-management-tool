@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -27,6 +28,12 @@ public class ExceptionHandlerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException e) {
         return ResponseEntity.badRequest().body("Invalid request body: " + e.getMessage());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleReadableException(HttpMessageNotReadableException e) {
+        return ResponseEntity.badRequest().body("Error " + HttpStatus.BAD_REQUEST + ": " + e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotWritableException.class)

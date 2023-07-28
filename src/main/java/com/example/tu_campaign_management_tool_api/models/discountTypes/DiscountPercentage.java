@@ -20,7 +20,6 @@ public class DiscountPercentage {
     @Getter
     private String discountId;
 
-    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discount_id")
     private CampaignDiscount campaignDiscount;
