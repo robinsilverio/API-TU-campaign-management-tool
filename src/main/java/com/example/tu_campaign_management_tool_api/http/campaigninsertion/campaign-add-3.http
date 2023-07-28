@@ -34,8 +34,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA1N
   "campaignItems": [
     {
       "campaignItemId": null,
-      "promoTitle": "Product 000001000001",
-      "promoText": "Promo text for Product 000001000001",
+      "promoTitle": "Product 1",
+      "promoText": "Promo text for Product 1",
       "promoImgUrl": "product_image1.jpg",
       "promoImgAltText": null,
       "weight": "1",
@@ -49,7 +49,53 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA1N
           "skuIds": ["00032123", "2239221"],
           "discountPrice": {
             "discountId": null,
-            "price": 20.0
+            "price": 40.0
+          },
+          "discountPercentage": null
+        }
+      ]
+    },
+    {
+      "campaignItemId": null,
+      "promoTitle": "Product 2",
+      "promoText": "Promo text for Product 2",
+      "promoImgUrl": "product_image1.jpg",
+      "promoImgAltText": null,
+      "weight": "1",
+      "teaser": "Teaser 2",
+      "extraText": "Extra Text 2",
+      "campaignItemDiscounts": [
+        {
+          "discountId": null,
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuIds": ["00065345"],
+          "discountPrice": null,
+          "discountPercentage": {
+            "discountId": null,
+            "percentage": 10.0
+          }
+        }
+      ]
+    },
+    {
+      "campaignItemId": null,
+      "promoTitle": "Product 3",
+      "promoText": "Promo text for Product 3",
+      "promoImgUrl": "product_image3.jpg",
+      "promoImgAltText": null,
+      "weight": "1",
+      "teaser": "Teaser 3",
+      "extraText": "Extra Text 3",
+      "campaignItemDiscounts": [
+        {
+          "discountId": null,
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuIds": ["342334", "453444", "655645"],
+          "discountPrice": {
+            "discountId": null,
+            "price": 55.0
           },
           "discountPercentage": null
         }

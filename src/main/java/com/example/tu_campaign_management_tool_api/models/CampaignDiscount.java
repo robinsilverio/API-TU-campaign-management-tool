@@ -46,13 +46,13 @@ public class CampaignDiscount {
     private Set<String> skuIds;
 
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "discount_price_id", nullable = true)
     @Getter
     @Setter
     private DiscountPrice discountPrice;
 
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "discount_percentage_id", nullable = true)
     @Getter
     @Setter
     private DiscountPercentage discountPercentage;
