@@ -1,7 +1,10 @@
 package com.example.tu_campaign_management_tool_api.security.jwt;
 
+import java.nio.charset.MalformedInputException;
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.example.tu_campaign_management_tool_api.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
@@ -49,16 +52,22 @@ public class JwtUtils {
         try {
             Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
             return true;
-        } catch (MalformedJwtException e) {
-            logger.error("Invalid JWT token: {}", e.getMessage());
-        } catch (ExpiredJwtException e) {
-            logger.error("JWT token is expired: {}", e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            logger.error("JWT token is unsupported: {}", e.getMessage());
-        } catch (IllegalArgumentException e) {
-            logger.error("JWT claims string is empty: {}", e.getMessage());
+        } catch (Exception e) {
+            getMapExceptionMessages().entrySet().stream()
+                    .filter(entry -> entry.getKey().isInstance(e))
+                    .findFirst()
+                    .ifPresent(entry -> logger.error("{}: {}", entry.getValue(), e.getMessage()));
         }
 
         return false;
+    }
+
+    private Map<Class<? extends Exception>, String> getMapExceptionMessages() {
+        return new HashMap<>() {{
+            put(MalformedJwtException.class, "Invalid JWT Token");
+            put(ExpiredJwtException.class, "JWT token is expired ");
+            put(UnsupportedJwtException.class, "JWT token is unsupported");
+            put(IllegalArgumentException.class, "JWT claims string is empty");
+        }};
     }
 }
