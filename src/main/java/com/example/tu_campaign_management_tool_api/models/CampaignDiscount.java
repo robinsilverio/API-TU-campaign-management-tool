@@ -45,12 +45,12 @@ public class CampaignDiscount {
     @Getter
     private Set<String> skuIds;
 
-    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
     @Getter
     @Setter
     private DiscountPrice discountPrice;
 
-    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
     @Getter
     @Setter
     private DiscountPercentage discountPercentage;

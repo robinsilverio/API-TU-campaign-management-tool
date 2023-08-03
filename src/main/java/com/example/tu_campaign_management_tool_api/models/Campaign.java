@@ -157,7 +157,7 @@ public class Campaign {
     @NotNull
     @Getter
     @Setter
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
             name = "WEB_CMP_CAMPAIGN_ITEM",
             joinColumns = @JoinColumn(name = "campaign_id"),

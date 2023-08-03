@@ -58,11 +58,11 @@ public class CampaignItem {
     @Getter
     private String extraText;
 
-    @ManyToMany(mappedBy = "campaignItems", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "campaignItems")
     @Setter
     private List<Campaign> campaigns;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
             name = "WEB_CMP_ITEM_DISCOUNT",
             joinColumns = @JoinColumn(name = "campaign_item_id"),

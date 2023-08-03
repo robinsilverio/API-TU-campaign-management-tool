@@ -1,7 +1,7 @@
 GET /api/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA1NTcyNjcsImV4cCI6MTY5MDY4MDcyNH0.cvEtVK7tOI-8ZlWbMC_FwmR5KFliC9dc958i-ZRwHQ4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
 
 ###
 # getting campaigns being unauthorized.
@@ -15,14 +15,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFMTIyMDA1IiwiaWF0IjoxNjg5M
 DELETE /api/campaign/delete/000001 HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3NzA2NzEsImV4cCI6MTY4OTg5NDEyOH0.ztinAIy7pHk9qAw3QryNZ4KpJW4YAjvwC8AkGU9-XiY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
 
 ###
 # Deleting all campaigns
 DELETE /api/campaign/delete/selected-campaigns
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk3NzA2NzEsImV4cCI6MTY4OTg5NDEyOH0.ztinAIy7pHk9qAw3QryNZ4KpJW4YAjvwC8AkGU9-XiY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
 
 {
   "selectedCampaigns": [
