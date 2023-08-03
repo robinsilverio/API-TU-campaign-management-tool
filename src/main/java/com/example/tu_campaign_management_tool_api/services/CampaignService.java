@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CampaignService {
@@ -37,6 +38,42 @@ public class CampaignService {
 
     public Campaign createCampaign(Campaign paramCampaignRequest) {
         return campaignRepository.save(paramCampaignRequest);
+    }
+
+    public Campaign updateCampaign(Campaign paramCampaignRequest) {
+
+        Optional<Campaign> retrievedOptionalCampaign = campaignRepository.findCampaignByCampaignId(paramCampaignRequest.getCampaignId());
+
+        if (!retrievedOptionalCampaign.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campaign not found");
+        }
+
+        Campaign retrievedCampaign = retrievedOptionalCampaign.get();
+
+        // Perform campaign update
+        retrievedCampaign.setTitle(paramCampaignRequest.getTitle());
+        retrievedCampaign.setStartDate(paramCampaignRequest.getStartDate());
+        retrievedCampaign.setEndDate(paramCampaignRequest.getEndDate());
+        retrievedCampaign.setPromoDescriptionText(paramCampaignRequest.getPromoDescriptionText());
+        retrievedCampaign.setPromoSummaryText(paramCampaignRequest.getPromoSummaryText());
+        retrievedCampaign.setRibbonType(paramCampaignRequest.getRibbonType());
+        retrievedCampaign.setTermsUrl(paramCampaignRequest.getTermsUrl());
+        retrievedCampaign.setCampaignClientGroups(paramCampaignRequest.getCampaignClientGroups());
+        retrievedCampaign.setCampaignTags(paramCampaignRequest.getCampaignTags());
+        retrievedCampaign.setRootIndicator(paramCampaignRequest.isRootIndicator());
+        retrievedCampaign.setFilterImgUrl(paramCampaignRequest.getFilterImgUrl());
+        retrievedCampaign.setFilterOverlayText(paramCampaignRequest.getFilterOverlayText());
+        retrievedCampaign.setPromoImgUrl(paramCampaignRequest.getPromoImgUrl());
+        retrievedCampaign.setPromoImgAltText(paramCampaignRequest.getPromoImgAltText());
+        retrievedCampaign.setCampaignWebsiteUrl(paramCampaignRequest.getCampaignWebsiteUrl());
+        retrievedCampaign.setCampaignWebsiteText(paramCampaignRequest.getCampaignWebsiteText());
+        retrievedCampaign.setAppTitle(paramCampaignRequest.getAppTitle());
+        retrievedCampaign.setAppImageUrl(paramCampaignRequest.getAppImageUrl());
+        retrievedCampaign.setAppSummary(paramCampaignRequest.getAppSummary());
+        retrievedCampaign.setRelativeUrl(paramCampaignRequest.getRelativeUrl());
+        retrievedCampaign.setCampaignItems(paramCampaignRequest.getCampaignItems());
+
+        return campaignRepository.save(retrievedCampaign);
     }
 
     public void deleteCampaign(String paramCampaignId) {

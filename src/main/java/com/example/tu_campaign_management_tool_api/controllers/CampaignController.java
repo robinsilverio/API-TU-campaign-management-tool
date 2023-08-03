@@ -38,8 +38,9 @@ public class CampaignController {
 
     @PutMapping
     @PreAuthorize("hasRole('ROLE_SUPER_USER_E-SALES')")
-    public ResponseEntity<?> updateCampaign() {
-        return ResponseEntity.ok("Update campaign");
+    public ResponseEntity<?> updateCampaign(@RequestBody Campaign paramCampaignRequest) {
+        Campaign updatedCampaign = campaignService.updateCampaign(paramCampaignRequest);
+        return ResponseEntity.ok(updatedCampaign);
     }
 
     @DeleteMapping("/delete/selected-campaigns")

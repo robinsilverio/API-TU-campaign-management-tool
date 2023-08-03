@@ -1,0 +1,105 @@
+###
+# Adding campaign.
+PUT /api/campaign HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTA1NTcyNjcsImV4cCI6MTY5MDY4MDcyNH0.cvEtVK7tOI-8ZlWbMC_FwmR5KFliC9dc958i-ZRwHQ4
+
+{
+  "campaignId": null,
+  "campaignFolderId": null,
+  "title": "Construction Product Campaign 000003",
+  "startDate": "2023-07-13T15:28:36.000+00:00",
+  "endDate": "2023-08-04T18:11:16.000+00:00",
+  "type": 9001,
+  "promoDescriptionText": "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
+  "promoSummaryText": "Save Big on Construction Products",
+  "ribbonType": "Special Offer",
+  "termsUrl": "abc",
+  "campaignClientGroups": [
+    "Industrie"
+  ],
+  "campaignTags": [],
+  "rootIndicator": true,
+  "filterImgUrl": "filter_image.jpg",
+  "filterOverlayText": "Limited Time Offer!",
+  "promoImgUrl": "promo_image.jpg",
+  "promoImgAltText": "abc",
+  "campaignWebsiteUrl": "https://constructionproductscampaign.com",
+  "campaignWebsiteText": "Learn More",
+  "appTitle": "Construction Products App",
+  "appImageUrl": "app_image.jpg",
+  "appSummary": "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
+  "relativeUrl": null,
+  "campaignItems": [
+    {
+      "campaignItemId": null,
+      "promoTitle": "Product 1",
+      "promoText": "Promo text for Product 1",
+      "promoImgUrl": "product_image1.jpg",
+      "promoImgAltText": null,
+      "weight": "1",
+      "teaser": "Teaser 1",
+      "extraText": "Extra Text 1",
+      "campaignItemDiscounts": [
+        {
+          "discountId": null,
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuIds": ["00032123", "2239221"],
+          "discountPrice": {
+            "discountId": null,
+            "price": 40.0
+          },
+          "discountPercentage": null
+        }
+      ]
+    },
+    {
+      "campaignItemId": null,
+      "promoTitle": "Product 2",
+      "promoText": "Promo text for Product 2",
+      "promoImgUrl": "product_image1.jpg",
+      "promoImgAltText": null,
+      "weight": "1",
+      "teaser": "Teaser 2",
+      "extraText": "Extra Text 2",
+      "campaignItemDiscounts": [
+        {
+          "discountId": null,
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuIds": ["00065345"],
+          "discountPrice": null,
+          "discountPercentage": {
+            "discountId": null,
+            "percentage": 10.0
+          }
+        }
+      ]
+    },
+    {
+      "campaignItemId": null,
+      "promoTitle": "Product 3",
+      "promoText": "Promo text for Product 3",
+      "promoImgUrl": "product_image3.jpg",
+      "promoImgAltText": null,
+      "weight": "1",
+      "teaser": "Teaser 3",
+      "extraText": "Extra Text 3",
+      "campaignItemDiscounts": [
+        {
+          "discountId": null,
+          "tuPoints": 5,
+          "altSkuImgUrl": null,
+          "skuIds": ["342334", "453444", "655645"],
+          "discountPrice": {
+            "discountId": null,
+            "price": 55.0
+          },
+          "discountPercentage": null
+        }
+      ]
+    }
+  ]
+}

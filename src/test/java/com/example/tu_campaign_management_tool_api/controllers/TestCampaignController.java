@@ -51,6 +51,9 @@ public class TestCampaignController {
     private ArrayList<Campaign> campaigns;
     private SelectedCampaignsRequest selectedCampaignsRequest;
     private String expectedResponseMessage;
+    private Campaign campaign;
+    private CampaignDiscount campaignDiscount;
+    private CampaignItem campaignItem;
 
 
     private void arrangeResponseMessage(String paramResponseMessage) {
@@ -63,6 +66,128 @@ public class TestCampaignController {
 
     private void arrangeCampaignId() {
         this.campaignId = "abcdef";
+    }
+
+    public void arrangeCampaign(
+            String paramId,
+            String paramTitle,
+            Date paramStartDate,
+            Date paramEndDate,
+            int paramType,
+            String paramPromoDescription,
+            String paramPromoSummary,
+            String paramRibbonType,
+            String paramTermsUrl,
+            Set<String> paramClientGroups,
+            Set<String> paramTags,
+            boolean paramRootIndicator,
+            String paramFilterImageUrl,
+            String paramFilterOverlayText,
+            String paramPromoImgUrl,
+            String paramPromoImgAltText,
+            String paramCampaignWebsiteUrl,
+            String paramCampaignWebsiteText,
+            String paramAppTitle,
+            String paramAppImageUrl,
+            String paramAppSummary,
+            String paramRelativeUrl,
+            List<CampaignItem> paramCampaignItems
+    ) {
+        this.campaign = new Campaign(paramId,
+                null,
+                paramTitle,
+                paramStartDate,
+                paramEndDate,
+                paramType,
+                paramPromoDescription,
+                paramPromoSummary,
+                paramRibbonType,
+                paramTermsUrl,
+                paramClientGroups,
+                paramTags,
+                paramRootIndicator,
+                paramFilterImageUrl,
+                paramFilterOverlayText,
+                paramPromoImgUrl,
+                paramPromoImgAltText,
+                paramCampaignWebsiteUrl,
+                paramCampaignWebsiteText,
+                paramAppTitle,
+                paramAppImageUrl,
+                paramAppSummary,
+                paramRelativeUrl,
+                paramCampaignItems
+        );
+    }
+
+    public void arrangeCampaignItem(
+            String paramId,
+            String paramTitle,
+            String paramPromoText,
+            String paramPromoImgUrl,
+            String paramPromoImgAltText,
+            String paramPromoWeight,
+            String paramTeaser,
+            String paramExtraText
+    ) {
+        this.campaignItem = new CampaignItem(
+                paramId,
+                paramTitle,
+                paramPromoText,
+                paramPromoImgUrl,
+                paramPromoImgAltText,
+                paramPromoWeight,
+                paramTeaser,
+                paramExtraText,
+                null,
+                null
+        );
+    }
+
+    public void arrangeCampaignDiscount(
+            String paramId,
+            int paramTuPoints,
+            String paramAltSkuImgUrl,
+            CampaignItem paramCampaignItem,
+            String[] paramSkus
+    ) {
+        campaignDiscount = new CampaignDiscount(
+                paramId,
+                paramTuPoints,
+                paramAltSkuImgUrl,
+                Arrays.asList(paramCampaignItem),
+                new HashSet<>(Arrays.asList(paramSkus)),
+                null,
+                null
+        );
+    }
+
+    public void arrangeAllComponentsRelatedToCampaigns() {
+        arrangeCampaignItem(
+                null,
+                "Product 000001000001",
+                "Promo text for Product 000001000001",
+                "product_image1.jpg",
+                null,
+                "M",
+                "Teaser 1",
+                "Extra Text 1"
+        );
+
+        arrangeCampaignDiscount(
+                null,
+                5,
+                null,
+                campaignItem,
+                new String[]{"00032123", "2239221"}
+        );
+
+        DiscountPrice discountPrice = new DiscountPrice(null, this.campaignDiscount, 20.0);
+        this.campaignDiscount.setDiscountPrice(discountPrice);
+
+        this.campaignItem.setCampaigns(Arrays.asList(this.campaign));
+        this.campaignItem.setCampaignItemDiscounts(Arrays.asList(this.campaignDiscount));
+        this.campaign.setCampaignItems(Arrays.asList(this.campaignItem));
     }
 
     private void arrangeCampaigns() {
@@ -163,31 +288,9 @@ public class TestCampaignController {
     @Test
     public void should_return_statusCode_200_when_a_campaign_is_added() {
         // Arrange.
-        CampaignItem campaignItem = new CampaignItem(
+        arrangeCampaign(
                 null,
-                "Product 000001000001",
-                "Promo text for Product 000001000001",
-                "product_image1.jpg",
-                null,
-                "M",
-                "Teaser 1",
-                "Extra Text 1",
-                null,
-                null
-        );
-        CampaignDiscount campaignDiscount = new CampaignDiscount(
-                null,
-                5,
-                null,
-                Arrays.asList(campaignItem),
-                new HashSet<>(Arrays.asList("00032123", "2239221")),
-                null,
-                null
-        );
-        DiscountPrice discountPrice = new DiscountPrice(null, campaignDiscount, 20.0);
-        campaignDiscount.setDiscountPrice(discountPrice);
-
-        Campaign campaign = new Campaign(null, null, "Construction Product Campaign 000003",
+                "Construction Product Campaign 000003",
                 Date.from(LocalDateTime.of(2023, 7, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
                 Date.from(LocalDateTime.of(2023, 8, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
                 9001,
@@ -208,13 +311,47 @@ public class TestCampaignController {
                 "app_image.jpg",
                 "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
                 null,
-                Arrays.asList()
-        );
-        campaignItem.setCampaigns(Arrays.asList(campaign));
-        campaignItem.setCampaignItemDiscounts(Arrays.asList(campaignDiscount));
+                Arrays.asList());
+        arrangeAllComponentsRelatedToCampaigns();
         // Act
-        when(this.campaignService.createCampaign(campaign)).thenReturn(campaign);
-        ResponseEntity<?> response = this.campaignController.createCampaign(campaign);
+        when(this.campaignService.createCampaign(this.campaign)).thenReturn(this.campaign);
+        ResponseEntity<?> response = this.campaignController.createCampaign(this.campaign);
+        this.actualStatusCode = response.getStatusCode().value();
+        // Assert
+        assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));
+    }
+
+    @Test
+    public void should_return_statusCode200_when_campaign_mutation_went_successfully() {
+        // Arrange
+        arrangeCampaign(
+                null,
+                "Construction Product Campaign 000003",
+                Date.from(LocalDateTime.of(2023, 7, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
+                Date.from(LocalDateTime.of(2023, 8, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
+                9001,
+                "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
+                "Save Big on Construction Products",
+                "Special Offer",
+                "abc",
+                new HashSet<>(Arrays.asList("Industrie")),
+                new HashSet<>(),
+                true,
+                "filter_image.jpg",
+                "Limited Time Offer!",
+                "promo_image.jpg",
+                "abc",
+                "https://constructionproductscampaign.com",
+                "Learn More",
+                "Construction Products App",
+                "app_image.jpg",
+                "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
+                null,
+                Arrays.asList());
+        arrangeAllComponentsRelatedToCampaigns();
+        // Act
+        when(this.campaignService.updateCampaign(this.campaign)).thenReturn(this.campaign);
+        ResponseEntity<?> response = this.campaignController.updateCampaign(this.campaign);
         this.actualStatusCode = response.getStatusCode().value();
         // Assert
         assertThat(this.actualStatusCode, is(this.EXPECTED_STATUS_CODE_200));

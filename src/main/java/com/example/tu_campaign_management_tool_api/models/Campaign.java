@@ -34,14 +34,17 @@ public class Campaign {
     @NotNull
     @Size(max = 40)
     @Getter
+    @Setter
     private String title;
 
     @NotNull
     @Getter
+    @Setter
     private Date startDate;
 
     @NotNull
     @Getter
+    @Setter
     private Date endDate;
 
     @Getter
@@ -51,91 +54,109 @@ public class Campaign {
     @NotNull
     @Size(max = 1000)
     @Getter
+    @Setter
     private String promoDescriptionText;
 
     @NotNull
     @Size(max = 500)
     @Getter
+    @Setter
     private String promoSummaryText;
 
     @NotNull
     @Size(max = 20)
     @Getter
+    @Setter
     private String ribbonType;
 
     @Column(nullable = true)
     @Size(max = 40)
     @Getter
+    @Setter
     private String termsUrl;
 
     @ElementCollection
     @CollectionTable(name = "WEB_CMP_CAMPAIGN_CLIENT_GROUP", joinColumns = @JoinColumn(name = "campaign_id"))
     @Column(name = "client_group_id")
     @Getter
+    @Setter
     private Set<String> campaignClientGroups;
 
     @ElementCollection
     @CollectionTable(name = "WEB_CMP_CAMPAIGN_LABEL", joinColumns = @JoinColumn(name = "campaign_id"))
     @Column(name = "label_text")
     @Getter
+    @Setter
     private Set<String> campaignTags;
 
     @Column(nullable = true, columnDefinition = "NUMBER(1,0) DEFAULT 0")
     @Getter
+    @Setter
     private boolean rootIndicator;
 
     @Column(nullable = true)
     @Size(max = 700)
     @Getter
+    @Setter
     private String filterImgUrl;
 
     @Column(nullable = true)
     @Size(max = 20)
     @Getter
+    @Setter
     private String filterOverlayText;
 
     @NotNull
     @Size(max = 700)
     @Getter
+    @Setter
     private String promoImgUrl;
 
     @NotNull
     @Size(max = 20)
     @Getter
+    @Setter
     private String promoImgAltText;
 
     @Column(nullable = true)
     @Size(max = 700)
     @Getter
+    @Setter
     private String campaignWebsiteUrl;
 
     @Column(nullable = true)
     @Size(max = 40)
     @Getter
+    @Setter
     private String campaignWebsiteText;
 
     @Column(nullable = true)
     @Size(max = 70)
     @Getter
+    @Setter
     private String appTitle;
 
     @Column(nullable = true)
     @Size(max = 700)
     @Getter
+    @Setter
     private String appImageUrl;
 
     @Column(nullable = true)
     @Size(max = 500)
     @Getter
+    @Setter
     private String appSummary;
 
     @Column(nullable = true)
     @Size(max = 700)
     @Getter
+    @Setter
     private String relativeUrl;
 
     @NotNull
     @Getter
+    @Setter
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "WEB_CMP_CAMPAIGN_ITEM",
