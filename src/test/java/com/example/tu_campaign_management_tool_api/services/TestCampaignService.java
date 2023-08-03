@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -46,6 +47,7 @@ public class TestCampaignService {
     private Campaign campaign;
     private ResponseStatusException responseStatusExceptionThrown;
     private List<CampaignItem> campaignItems;
+    private final String EXPECTED_ERROR_MESSAGE = "404 NOT_FOUND \"Campaign not found.\"";
 
     private void arrangeCampaignsAndSize(List<Campaign> paramCampaigns) {
         this.campaigns = new ArrayList<>(paramCampaigns);
@@ -85,10 +87,21 @@ public class TestCampaignService {
         this.campaignService.deleteCampaign(this.campaign.getCampaignId());
     }
 
-    private void actThrowableResponseStatusException() {
-        when(this.campaignRepository.findCampaignByCampaignId(this.campaign.getCampaignId())).thenReturn(Optional.empty());
+    private void stubMethodFindCampaignByCampaignIdReturningEmpty() {
+        when(this.campaignRepository.findCampaignByCampaignId(any())).thenReturn(Optional.empty());
+    }
+
+    private void actThrowableResponseStatusExceptionOnDeletion() {
+        stubMethodFindCampaignByCampaignIdReturningEmpty();
         this.responseStatusExceptionThrown = assertThrows(ResponseStatusException.class, () -> {
             this.campaignService.deleteCampaign(this.campaign.getCampaignId());
+        });
+    }
+
+    private void actThrowableResponseStatusExceptionOnUpdate() {
+        stubMethodFindCampaignByCampaignIdReturningEmpty();
+        this.responseStatusExceptionThrown = assertThrows(ResponseStatusException.class, () -> {
+            this.campaignService.updateCampaign(this.campaign);
         });
     }
 
@@ -122,6 +135,41 @@ public class TestCampaignService {
         Campaign actualCampaign = this.campaignService.createCampaign(expectedCampaign);
         // Assert
         assertNotNull(actualCampaign);
+    }
+
+    @Test
+    public void should_return_a_campaign_after_updating() {
+        // Arrange
+        arrangeCampaign();
+        String expectedUpdatedTitle = "Updated campaign title";
+        this.campaign.setTitle(expectedUpdatedTitle);
+        // Act
+        when(this.campaignRepository.findCampaignByCampaignId(this.campaign.getCampaignId())).thenReturn(Optional.of(this.campaign));
+        when(this.campaignRepository.save(this.campaign)).thenReturn(this.campaign);
+        Campaign updatedCampaign = this.campaignService.updateCampaign(this.campaign);
+        // Assert
+        assertThat(updatedCampaign.getTitle(), is(expectedUpdatedTitle));
+    }
+
+    @Test
+    public void should_trigger_an_exception_of_type_responseStatusException_if_campaign_isNonExistent_when_updating() {
+        // Arrange
+        arrangeCampaign();
+        // Act
+        actThrowableResponseStatusExceptionOnUpdate();
+        // Assert
+        assertThat(this.responseStatusExceptionThrown, instanceOf(ResponseStatusException.class));
+    }
+
+    @Test
+    public void should_return_an_errorMessage_after_responseStatusException_is_thrown_during_update() {
+        // Arrange
+        arrangeCampaign();
+        // Act
+        actThrowableResponseStatusExceptionOnUpdate();
+        String actualErrorMessage = responseStatusExceptionThrown.getMessage();
+        // Assert
+        assertThat(actualErrorMessage, is(this.EXPECTED_ERROR_MESSAGE));
     }
 
     @Test
@@ -172,25 +220,24 @@ public class TestCampaignService {
     }
 
     @Test
-    public void should_trigger_responseStatusException_if_campaign_isNonExistent() {
+    public void should_trigger_responseStatusException_if_campaign_isNonExistent_during_deletion() {
         // Arrange
         arrangeCampaign();
         // Act
-        actThrowableResponseStatusException();
+        actThrowableResponseStatusExceptionOnDeletion();
         // Assert
         assertThat(this.responseStatusExceptionThrown, instanceOf(ResponseStatusException.class));
     }
 
     @Test
-    public void should_return_an_errorMessage_if_campaign_isNonExistent() {
+    public void should_return_an_errorMessage_if_campaign_isNonExistent_during_deletion() {
         // Arrange
-        String expectedErrorMessage =  "404 NOT_FOUND \"Campaign not found.\"";
         arrangeCampaign();
         // Act
-        actThrowableResponseStatusException();
+        actThrowableResponseStatusExceptionOnDeletion();
         String actualErrorMessage = responseStatusExceptionThrown.getMessage();
         // Assert
-        assertThat(actualErrorMessage, is(expectedErrorMessage));
+        assertThat(actualErrorMessage, is(this.EXPECTED_ERROR_MESSAGE));
     }
 
 }

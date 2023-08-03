@@ -11,7 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CampaignService {
@@ -43,9 +42,8 @@ public class CampaignService {
     public Campaign updateCampaign(Campaign paramCampaignRequest) {
 
         Optional<Campaign> retrievedOptionalCampaign = campaignRepository.findCampaignByCampaignId(paramCampaignRequest.getCampaignId());
-
         if (!retrievedOptionalCampaign.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campaign not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campaign not found.");
         }
 
         Campaign retrievedCampaign = retrievedOptionalCampaign.get();
