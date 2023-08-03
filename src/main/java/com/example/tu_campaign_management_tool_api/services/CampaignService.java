@@ -96,11 +96,9 @@ public class CampaignService {
             campaignItemRepository.delete(campaignItem);
             campaignItemDiscountsBelongingToCampaignItem.forEach(campaignDiscount -> {
                 if (campaignDiscount.getDiscountPrice() != null) {
-                    System.out.println("DiscountPrice is available "  + campaignDiscount.getDiscountPrice());
                     campaignDiscountPriceRepository.delete(campaignDiscount.getDiscountPrice());
                     campaignDiscount.setDiscountPrice(null);
                 } else if (campaignDiscount.getDiscountPercentage() != null) {
-                    System.out.println("DiscountPercentage is available " + campaignDiscount.getDiscountPercentage());
                     campaignDiscountPercentageRepository.delete(campaignDiscount.getDiscountPercentage());
                     campaignDiscount.setDiscountPercentage(null);
                 }
