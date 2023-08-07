@@ -33,6 +33,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleReadableException(HttpMessageNotReadableException e) {
+        e.printStackTrace();
         return ResponseEntity.badRequest().body("Error " + HttpStatus.BAD_REQUEST + ": " + e.getMessage());
     }
 

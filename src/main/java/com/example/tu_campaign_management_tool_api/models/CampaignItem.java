@@ -44,7 +44,6 @@ public class CampaignItem {
     private String promoImgAltText;
 
     @NotNull
-    @Size(max = 1)
     @Getter
     private String weight;
 
