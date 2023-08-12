@@ -2,6 +2,7 @@ package com.example.tu_campaign_management_tool_api.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.id.IdentifierGenerationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -59,6 +60,12 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleSqlConstraintViolationException(SQLIntegrityConstraintViolationException e) {
+        return ResponseEntity.internalServerError().body("Error: " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+    }
+
+    @ExceptionHandler(IdentifierGenerationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleIdentifierGenerationException(IdentifierGenerationException e) {
         return ResponseEntity.internalServerError().body("Error: " + HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
     }
 
