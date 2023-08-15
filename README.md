@@ -25,4 +25,5 @@ For running tests, simply run the command ```mvn test``` or by accessing the tes
 and from there run these manually. Also, the test suite class is called TuCMTApiApplicationTests.java
 
 ## 5. Testing API-requests
-Work in progress...
+Using http-files located in http folder in project structure. Use auth.http for doing request obtaining token so
+that you can test requests of adding campaigns etc.
