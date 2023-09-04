@@ -1,7 +1,7 @@
 version: '3.0'
 services:
-  tu-campaign-management-tool:
-    image: tu-campaign-management-tool:0.0.1-SNAPSHOT
+  tu-campaign-management-tool-backend:
+    image: tu-campaign-backend:0.0.1-SNAPSHOT
     ports:
       - 8080:8080
     restart: always
