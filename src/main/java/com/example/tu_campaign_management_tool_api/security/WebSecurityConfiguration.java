@@ -4,11 +4,11 @@ import com.example.tu_campaign_management_tool_api.security.jwt.AuthEntryPointJw
 import com.example.tu_campaign_management_tool_api.security.jwt.AuthTokenFilter;
 import com.example.tu_campaign_management_tool_api.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,6 +30,9 @@ public class WebSecurityConfiguration {
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
+
+    @Value("${tu.app.allowedOrigin}")
+    protected String allowedOrigin;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -63,7 +66,7 @@ public class WebSecurityConfiguration {
                     // For configuring CORS.
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
                     corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
-                    corsConfiguration.addAllowedOrigin("http://localhost:5173");
+                    corsConfiguration.addAllowedOrigin(this.allowedOrigin);
                     corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH", "DELETE"));
                     corsConfiguration.setAllowCredentials(true);
                     corsConfiguration.setExposedHeaders(List.of("Authorization"));
