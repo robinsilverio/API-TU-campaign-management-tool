@@ -95,7 +95,7 @@ public class TestAuthController {
         String requestJson = "{\"login\":\"robin\", \"password\":\"test123\"}";
 
         // Act and Assert
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signin")
+        mockMvc.perform(MockMvcRequestBuilders.post("/auth/signin")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());

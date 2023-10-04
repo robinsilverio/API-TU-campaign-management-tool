@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/campaign")
+@RequestMapping("/campaign")
 public class CampaignController {
 
     @Autowired
