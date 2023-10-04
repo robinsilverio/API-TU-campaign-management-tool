@@ -21,8 +21,7 @@ import org.springframework.stereotype.Component;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${tu.app.jwtSecret}")
-    protected String jwtSecret;
+    protected String jwtSecret = System.getProperty("tu.app.jwtSecret");
 
     @Value("${tu.app.jwtExpirationMs}")
     protected int jwtExpirationMs;

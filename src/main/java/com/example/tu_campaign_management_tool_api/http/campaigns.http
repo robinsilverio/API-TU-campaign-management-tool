@@ -1,7 +1,7 @@
 GET /api/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTY0MjIzNTIsImV4cCI6MTY5NjU0NTgwOX0.JauJn9d4nn1pivg_F12TurJve7WqP2J7g7S6RMj6WP8
 
 ###
 # getting campaigns being unauthorized.
