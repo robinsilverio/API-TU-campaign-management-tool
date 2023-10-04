@@ -1,6 +1,6 @@
 ###
 # Updating campaign.
-PUT /api/campaign HTTP/1.1
+PUT /campaign-management-backend/campaign HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k

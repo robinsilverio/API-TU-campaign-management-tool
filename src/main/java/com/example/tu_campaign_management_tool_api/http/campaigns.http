@@ -1,25 +1,25 @@
-GET /api/campaign/all HTTP/1.1
+GET /campaign-management-backend/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTY0MjIzNTIsImV4cCI6MTY5NjU0NTgwOX0.JauJn9d4nn1pivg_F12TurJve7WqP2J7g7S6RMj6WP8
 
 ###
 # getting campaigns being unauthorized.
-GET /api/campaign/all HTTP/1.1
+GET /campaign-management-backend/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFMTIyMDA1IiwiaWF0IjoxNjg5MDc0NTI4LCJleHAiOjE2ODkxOTc5ODV9.e6F50-WFwMeDPReUkLw7l78_ZlxQ3CigBhBR9tCGjfU
 
 ###
 # Deleting campaign.
-DELETE /api/campaign/delete/000001 HTTP/1.1
+DELETE /campaign-management-backend/campaign/delete/000001 HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
 
 ###
 # Deleting all campaigns
-DELETE /api/campaign/delete/selected-campaigns
+DELETE /campaign-management-backend/campaign/delete/selected-campaigns
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
@@ -329,7 +329,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
 
 ###
 # Adding campaign.
-POST /api/campaign HTTP/1.1
+POST /campaign-management-backend/campaign HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5MzY1NDMsImV4cCI6MTY5MDA2MDAwMH0.OWGkOP9GV7RQAa_pdPJ2xQXmHqrNQz5TO5R4jVhgNuM

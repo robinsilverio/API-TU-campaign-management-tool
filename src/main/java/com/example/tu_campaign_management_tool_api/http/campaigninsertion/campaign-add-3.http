@@ -1,6 +1,6 @@
 ###
 # Adding campaign.
-POST /api/campaign HTTP/1.1
+POST /campaign-management-backend/campaign HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzOTgzODcsImV4cCI6MTY5MTUyMTg0NH0.aggOnBQUl5uc3FHxWld4LeMHd7wtUBLI7i82RLGrU3o
