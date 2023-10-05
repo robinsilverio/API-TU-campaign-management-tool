@@ -5,5 +5,7 @@ services:
     ports:
       - 8080:8080
     restart: always
+    env_file:
+      - ../.env
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
