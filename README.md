@@ -5,7 +5,7 @@ The purpose of this application is to function as an intermediate between the fr
 and the database for managing campaigns and pricepromotions in the webshop.
 
 ## 2. Required software
-It is required to have java installed, preferably of version 17. And for running mvn-commands, it is required to install
+It is required to have java installed, preferably of version 17 (17.0.9). And for running mvn-commands, it is required to install
 maven, preferably of version >= 3.
 
 Link to download maven: https://maven.apache.org/download.cgi
@@ -33,10 +33,10 @@ If you want to deploy the application locally using a docker container, you can 
 Keep in mind that it is required to install docker engine.
 Link to docker installation: https://docs.docker.com/engine/install/
 
-## Steps to reproduce
+### Steps to reproduce
 Below are the steps for ensuring the app deployment:
 
-### Step 1 - Ensure that a Dockerfile and compose file are stored in the project structure.
+#### Step 1 - Ensure that a Dockerfile and compose file are stored in the project structure.
 For now it is not needed, but if there are absence of these files, you must add these.
 Dockerfile:
 ```
@@ -59,9 +59,9 @@ services:
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
 ```
-### Step 2 - Open terminal and navigate to the project.
+#### Step 2 - Open terminal and navigate to the project.
 Use command ```cd <path to the project>```
-### Step 3 - Create a docker image.
+#### Step 3 - Create a docker image.
 Issue command to create a docker-image. Remember to use the name of the image that is
 declared in the compose file.
 
@@ -69,19 +69,19 @@ Command for creating an docker image:
 ```bash
 docker build -t tu-campaign-backend:0.0.1-SNAPSHOT .
 ```
-### Step 4 - Issue command docker compose to start deployment.
+#### Step 4 - Issue command docker compose to start deployment.
 Command:
 ```bash
 docker-compose -f <path to compose yml-file> up -d
 ```
-Step 5 - Access the website by url http://localhost:5173
+#### Step 5 - Access the website by url http://localhost:5173
 
 If you want to stop the deployment locally, then issue this command to stop it.
 ```
 docker-compose -f <path to compose yml-file> down
 ```
 
-## Troubleshoot
+## 7. Troubleshoot
 Sometimes it can be a hard time and time consuming to find solutions for problems that
 you encounter. But lets list a couple of problems with its solutions that happens during development.
 
