@@ -74,9 +74,10 @@ Command:
 ```bash
 docker-compose -f <path to compose yml-file> up -d
 ```
-#### Step 5 - Access the website by url http://localhost:5173
 
-If you want to stop the deployment locally, then issue this command to stop it.
+After issuing the command, you can access the website by url http://localhost:5173
+
+If you want to stop the deployment locally, then issue the command below to stop it.
 ```
 docker-compose -f <path to compose yml-file> down
 ```
