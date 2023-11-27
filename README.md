@@ -75,8 +75,7 @@ Command:
 docker-compose -f <path to compose yml-file> up -d
 ```
 
-After issuing the command, you can access the website by url http://localhost:5173
-
+After issuing the command, you can access the website by url http://localhost:8080/campaign-management-backend.
 If you want to stop the deployment locally, then issue the command below to stop it.
 ```
 docker-compose -f <path to compose yml-file> down
