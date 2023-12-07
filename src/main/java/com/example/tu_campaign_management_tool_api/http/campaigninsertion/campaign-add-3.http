@@ -9,8 +9,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzO
   "campaignId": null,
   "campaignFolderId": null,
   "title": "Construction Product Campaign 000001",
-  "startDate": "2023-07-13T15:28:36.000+00:00",
-  "endDate": "2023-08-04T18:11:16.000+00:00",
+  "startDate": "2024-07-13T15:28:36.000+00:00",
+  "endDate": "2024-08-04T18:11:16.000+00:00",
   "type": 9001,
   "promoDescriptionText": "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
   "promoSummaryText": "Save Big on Construction Products",
@@ -38,7 +38,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzO
       "promoText": "Promo text for Product 1",
       "promoImgUrl": "product_image1.jpg",
       "promoImgAltText": null,
-      "weight": "1",
+      "weight": "M",
       "teaser": "Teaser 1",
       "extraText": "Extra Text 1",
       "campaignItemDiscounts": [
@@ -61,7 +61,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzO
       "promoText": "Promo text for Product 2",
       "promoImgUrl": "product_image1.jpg",
       "promoImgAltText": null,
-      "weight": "1",
+      "weight": "M",
       "teaser": "Teaser 2",
       "extraText": "Extra Text 2",
       "campaignItemDiscounts": [
@@ -84,7 +84,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzO
       "promoText": "Promo text for Product 3",
       "promoImgUrl": "product_image3.jpg",
       "promoImgAltText": null,
-      "weight": "1",
+      "weight": "M",
       "teaser": "Teaser 3",
       "extraText": "Extra Text 3",
       "campaignItemDiscounts": [

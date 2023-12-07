@@ -21,12 +21,12 @@ on startup of IDE
 5. To run the application, simply go to the application main class called TuCMTApiApplication.java
 
 ## 4. Running tests:
-For running tests, simply run the command ```mvn test``` or by accessing the testfiles that are stored in src/test
-and from there run these manually. Also, the test suite class is called TuCMTApiApplicationTests.java
+For running tests, simply run the command ```mvn test``` or by accessing the test files that are 
+stored in **src/test** and from there run these manually. Also, the test suite class is called TuCMTApiApplicationTests.java
 
 ## 5. Testing API-requests
-Using http-files located in http folder in project structure. Use auth.http for doing request obtaining token so
-that you can test requests of adding campaigns etc.
+Using http-files located in folder **http/** in project structure. Use file auth.http for doing request obtaining JWT-token
+to copy paste it in the header Authentication (e.g. campaign-add-3.http for adding campaign).
 
 ## 6. Local deployment using docker
 If you want to deploy the application locally using a docker container, you can use docker commands to perform that.
@@ -44,7 +44,7 @@ FROM eclipse-temurin:17.0.1_12-jre-alpine
 MAINTAINER technischeunie.com
 ARG JAR_FILE=target/TU_campaign_management_tool_API-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} /TU_campaign_management_tool_API-0.0.1.jar
-ENTRYPOINT ["java", "-jar", "/TU_campaign_management_tool_API-0.0.1.jar"]
+ENTRYPOINT ["java", "-Djasypt.encryptor.password=ZxGy+zQ7DImWbxguAPFFku47wRtzRnHy29bFFCKdKPg=", "-Dtu.app.jwtSecret=ZxGy+zQ7DImWbxguAPFFku47wRtzRnHy29bFFCKdKPg=", "-jar", "/TU_campaign_management_tool_API-0.0.1.jar"]
 LABEL com.jfrog.artifactory.retention.maxCount="10"
 ```
 Compose file (store this in a sub directory _docker/_ inside the project structure):
@@ -80,6 +80,8 @@ If you want to stop the deployment locally, then issue the command below to stop
 ```
 docker-compose -f <path to compose yml-file> down
 ```
+
+_**NOTE:** Keep in mind that you have to use VPN-network of the company  in order to make database connection with the API work_ 
 
 ## 7. Troubleshoot
 Sometimes it can be a hard time and time consuming to find solutions for problems that
