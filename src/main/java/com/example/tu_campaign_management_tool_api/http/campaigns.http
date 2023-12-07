@@ -1,28 +1,28 @@
 GET /campaign-management-backend/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTY0MjIzNTIsImV4cCI6MTY5NjU0NTgwOX0.JauJn9d4nn1pivg_F12TurJve7WqP2J7g7S6RMj6WP8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE3MDE5NTQzNzAsImV4cCI6MTcwMjA3NzgyN30.pw1ilBg93rr-eFkUDrhy_J7XzWFtfi1Hiu5nIAlc1ZQ
 
 ###
 # getting campaigns being unauthorized.
 GET /campaign-management-backend/campaign/all HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFMTIyMDA1IiwiaWF0IjoxNjg5MDc0NTI4LCJleHAiOjE2ODkxOTc5ODV9.e6F50-WFwMeDPReUkLw7l78_ZlxQ3CigBhBR9tCGjfU
+Authorization: Bearer
 
 ###
 # Deleting campaign.
 DELETE /campaign-management-backend/campaign/delete/000001 HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE3MDE5NTQzNzAsImV4cCI6MTcwMjA3NzgyN30.pw1ilBg93rr-eFkUDrhy_J7XzWFtfi1Hiu5nIAlc1ZQ
 
 ###
 # Deleting all campaigns
 DELETE /campaign-management-backend/campaign/delete/selected-campaigns
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwNjAyNTYsImV4cCI6MTY5MTE4MzcxM30.Lan1WyaQgvEd6WqGV588xlBApuqkLgVp6TEi_gPvg0k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE3MDE5NTQzNzAsImV4cCI6MTcwMjA3NzgyN30.pw1ilBg93rr-eFkUDrhy_J7XzWFtfi1Hiu5nIAlc1ZQ
 
 {
   "selectedCampaigns": [
@@ -30,20 +30,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
       "campaignId": "000001",
       "campaignFolderId": null,
       "title": "Construction Product Campaign 000001",
-      "startDate": "2023-07-18T14:39:09.000+00:00",
-      "endDate": "2023-08-12T21:13:10.000+00:00",
+      "startDate": "2024-07-20T08:30:00.000+00:00",
+      "endDate": "2024-08-20T08:30:00.000+00:00",
       "type": 9001,
       "promoDescriptionText": "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
       "promoSummaryText": "Save Big on Construction Products",
       "ribbonType": "Special Offer",
       "termsUrl": "abc",
       "campaignClientGroups": [
-        "Industrie"
+        "REST"
       ],
       "campaignTags": [],
       "rootIndicator": true,
       "filterImgUrl": "filter_image.jpg",
-      "filterOverlayText": "Limited Time Offer!",
+      "filterOverlayText": "Limited Time Offer",
       "promoImgUrl": "promo_image.jpg",
       "promoImgAltText": "abc",
       "campaignWebsiteUrl": "https://constructionproductscampaign.com",
@@ -51,71 +51,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
       "appTitle": "Construction Products App",
       "appImageUrl": "app_image.jpg",
       "appSummary": "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
-      "relativeUrl": null,
+      "relativeUrl": "campaign-actie/page",
       "campaignItems": [
         {
-          "campaignItemId": "000001000001",
+          "campaignItemId": "000001",
           "promoTitle": "Product 000001000001",
           "promoText": "Promo text for Product 000001000001",
           "promoImgUrl": "product_image1.jpg",
           "promoImgAltText": null,
-          "weight": "1",
+          "weight": "M",
           "teaser": "Teaser 1",
           "extraText": "Extra Text 1",
           "campaignItemDiscounts": [
             {
-              "discountId": "000001000001_D",
+              "discountId": "000001",
               "tuPoints": 5,
               "altSkuImgUrl": null,
-              "skuIds": [],
+              "skuIds": [
+                "00032123",
+                "2239221"
+              ],
               "discountPrice": {
-                "discountId": "000001000001_D",
-                "price": 20.0
-              },
-              "discountPercentage": null
-            }
-          ]
-        },
-        {
-          "campaignItemId": "000001000002",
-          "promoTitle": "Product 000001000002",
-          "promoText": "Promo text for Product 000001000002",
-          "promoImgUrl": "product_image2.jpg",
-          "promoImgAltText": null,
-          "weight": "2",
-          "teaser": "Teaser 2",
-          "extraText": "Extra Text 2",
-          "campaignItemDiscounts": [
-            {
-              "discountId": "000001000002_D",
-              "tuPoints": 5,
-              "altSkuImgUrl": null,
-              "skuIds": [],
-              "discountPrice": {
-                "discountId": "000001000002_D",
-                "price": 20.0
-              },
-              "discountPercentage": null
-            }
-          ]
-        },
-        {
-          "campaignItemId": "000001000003",
-          "promoTitle": "Product 000001000003",
-          "promoText": "Promo text for Product 000001000003",
-          "promoImgUrl": "product_image3.jpg",
-          "promoImgAltText": null,
-          "weight": "3",
-          "teaser": "Teaser 3",
-          "extraText": "Extra Text 3",
-          "campaignItemDiscounts": [
-            {
-              "discountId": "000001000003_D",
-              "tuPoints": 5,
-              "altSkuImgUrl": null,
-              "skuIds": [],
-              "discountPrice": {
-                "discountId": "000001000003_D",
+                "discountId": "000001",
                 "price": 20.0
               },
               "discountPercentage": null
@@ -128,23 +85,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
       "campaignId": "000002",
       "campaignFolderId": null,
       "title": "Construction Product Campaign 000002",
-      "startDate": "2023-07-18T14:39:09.000+00:00",
-      "endDate": "2023-08-09T00:16:25.000+00:00",
+      "startDate": "2024-07-20T08:30:00.000+00:00",
+      "endDate": "2024-08-20T08:30:00.000+00:00",
       "type": 9001,
       "promoDescriptionText": "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
       "promoSummaryText": "Save Big on Construction Products",
       "ribbonType": "Special Offer",
       "termsUrl": "abc",
       "campaignClientGroups": [
-        "Industrie"
+        "REST"
       ],
-      "campaignTags": [
-        "Tag1",
-        "Tag2"
-      ],
+      "campaignTags": [],
       "rootIndicator": true,
       "filterImgUrl": "filter_image.jpg",
-      "filterOverlayText": "Limited Time Offer!",
+      "filterOverlayText": "Limited Time Offer",
       "promoImgUrl": "promo_image.jpg",
       "promoImgAltText": "abc",
       "campaignWebsiteUrl": "https://constructionproductscampaign.com",
@@ -152,71 +106,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
       "appTitle": "Construction Products App",
       "appImageUrl": "app_image.jpg",
       "appSummary": "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
-      "relativeUrl": null,
+      "relativeUrl": "campaign-actie/page",
       "campaignItems": [
         {
-          "campaignItemId": "000002000001",
-          "promoTitle": "Product 000002000001",
-          "promoText": "Promo text for Product 000002000001",
+          "campaignItemId": "000002",
+          "promoTitle": "Product 000001000001",
+          "promoText": "Promo text for Product 000001000002",
           "promoImgUrl": "product_image1.jpg",
           "promoImgAltText": null,
-          "weight": "1",
+          "weight": "M",
           "teaser": "Teaser 1",
           "extraText": "Extra Text 1",
           "campaignItemDiscounts": [
             {
-              "discountId": "000002000001_D",
+              "discountId": "000002",
               "tuPoints": 5,
               "altSkuImgUrl": null,
-              "skuIds": [],
+              "skuIds": [
+                "00032123",
+                "2239221"
+              ],
               "discountPrice": {
-                "discountId": "000002000001_D",
-                "price": 20.0
-              },
-              "discountPercentage": null
-            }
-          ]
-        },
-        {
-          "campaignItemId": "000002000002",
-          "promoTitle": "Product 000002000002",
-          "promoText": "Promo text for Product 000002000002",
-          "promoImgUrl": "product_image2.jpg",
-          "promoImgAltText": null,
-          "weight": "2",
-          "teaser": "Teaser 2",
-          "extraText": "Extra Text 2",
-          "campaignItemDiscounts": [
-            {
-              "discountId": "000002000002_D",
-              "tuPoints": 5,
-              "altSkuImgUrl": null,
-              "skuIds": [],
-              "discountPrice": {
-                "discountId": "000002000002_D",
-                "price": 20.0
-              },
-              "discountPercentage": null
-            }
-          ]
-        },
-        {
-          "campaignItemId": "000002000003",
-          "promoTitle": "Product 000002000003",
-          "promoText": "Promo text for Product 000002000003",
-          "promoImgUrl": "product_image3.jpg",
-          "promoImgAltText": null,
-          "weight": "3",
-          "teaser": "Teaser 3",
-          "extraText": "Extra Text 3",
-          "campaignItemDiscounts": [
-            {
-              "discountId": "000002000003_D",
-              "tuPoints": 5,
-              "altSkuImgUrl": null,
-              "skuIds": [],
-              "discountPrice": {
-                "discountId": "000002000003_D",
+                "discountId": "000002",
                 "price": 20.0
               },
               "discountPercentage": null
@@ -229,20 +140,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
       "campaignId": "000003",
       "campaignFolderId": null,
       "title": "Construction Product Campaign 000003",
-      "startDate": "2023-07-18T14:39:09.000+00:00",
-      "endDate": "2023-07-22T09:59:52.000+00:00",
+      "startDate": "2024-07-20T08:30:00.000+00:00",
+      "endDate": "2024-08-20T08:30:00.000+00:00",
       "type": 9001,
       "promoDescriptionText": "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
       "promoSummaryText": "Save Big on Construction Products",
       "ribbonType": "Special Offer",
       "termsUrl": "abc",
       "campaignClientGroups": [
-        "Industrie"
+        "REST"
       ],
       "campaignTags": [],
       "rootIndicator": true,
       "filterImgUrl": "filter_image.jpg",
-      "filterOverlayText": "Limited Time Offer!",
+      "filterOverlayText": "Limited Time Offer",
       "promoImgUrl": "promo_image.jpg",
       "promoImgAltText": "abc",
       "campaignWebsiteUrl": "https://constructionproductscampaign.com",
@@ -250,71 +161,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
       "appTitle": "Construction Products App",
       "appImageUrl": "app_image.jpg",
       "appSummary": "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
-      "relativeUrl": null,
+      "relativeUrl": "campaign-actie/page",
       "campaignItems": [
         {
-          "campaignItemId": "000003000001",
-          "promoTitle": "Product 000003000001",
-          "promoText": "Promo text for Product 000003000001",
+          "campaignItemId": "000003",
+          "promoTitle": "Product 000001000001",
+          "promoText": "Promo text for Product 000001000003",
           "promoImgUrl": "product_image1.jpg",
           "promoImgAltText": null,
-          "weight": "1",
+          "weight": "M",
           "teaser": "Teaser 1",
           "extraText": "Extra Text 1",
           "campaignItemDiscounts": [
             {
-              "discountId": "000003000001_D",
+              "discountId": "000003",
               "tuPoints": 5,
               "altSkuImgUrl": null,
-              "skuIds": [],
+              "skuIds": [
+                "00032123",
+                "2239221"
+              ],
               "discountPrice": {
-                "discountId": "000003000001_D",
-                "price": 20.0
-              },
-              "discountPercentage": null
-            }
-          ]
-        },
-        {
-          "campaignItemId": "000003000002",
-          "promoTitle": "Product 000003000002",
-          "promoText": "Promo text for Product 000003000002",
-          "promoImgUrl": "product_image2.jpg",
-          "promoImgAltText": null,
-          "weight": "2",
-          "teaser": "Teaser 2",
-          "extraText": "Extra Text 2",
-          "campaignItemDiscounts": [
-            {
-              "discountId": "000003000002_D",
-              "tuPoints": 5,
-              "altSkuImgUrl": null,
-              "skuIds": [],
-              "discountPrice": {
-                "discountId": "000003000002_D",
-                "price": 20.0
-              },
-              "discountPercentage": null
-            }
-          ]
-        },
-        {
-          "campaignItemId": "000003000003",
-          "promoTitle": "Product 000003000003",
-          "promoText": "Promo text for Product 000003000003",
-          "promoImgUrl": "product_image3.jpg",
-          "promoImgAltText": null,
-          "weight": "3",
-          "teaser": "Teaser 3",
-          "extraText": "Extra Text 3",
-          "campaignItemDiscounts": [
-            {
-              "discountId": "000003000003_D",
-              "tuPoints": 5,
-              "altSkuImgUrl": null,
-              "skuIds": [],
-              "discountPrice": {
-                "discountId": "000003000003_D",
+                "discountId": "000003",
                 "price": 20.0
               },
               "discountPercentage": null
@@ -332,12 +200,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEwN
 POST /campaign-management-backend/campaign HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2ODk5MzY1NDMsImV4cCI6MTY5MDA2MDAwMH0.OWGkOP9GV7RQAa_pdPJ2xQXmHqrNQz5TO5R4jVhgNuM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE3MDE5NTQzNzAsImV4cCI6MTcwMjA3NzgyN30.pw1ilBg93rr-eFkUDrhy_J7XzWFtfi1Hiu5nIAlc1ZQ
 
 {
   "campaignId": null,
   "campaignFolderId": null,
-  "title": "Construction Product Campaign 000001",
+  "title": "Test Campaign",
   "startDate": "2023-07-13T15:28:36.000+00:00",
   "endDate": "2023-08-04T18:11:16.000+00:00",
   "type": 9001,

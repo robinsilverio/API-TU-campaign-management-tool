@@ -25,8 +25,14 @@ For running tests, simply run the command ```mvn test``` or by accessing the tes
 stored in **src/test** and from there run these manually. Also, the test suite class is called TuCMTApiApplicationTests.java
 
 ## 5. Testing API-requests
-Using http-files located in folder **http/** in project structure. Use file auth.http for doing request obtaining JWT-token
-to copy paste it in the header Authentication (e.g. campaign-add-3.http for adding campaign).
+Using http-files located in folder http/ in project structure. 
+
+For testing login functionality,
+use http file **auth.http**.
+
+Use http-file **campaigns.http** for testing add/remove/view/ campaigns. Keep in mind that it is required
+to set a JWT token in the http header _"Authorization"_ in each endpoint, otherwise it will send a 403 error. By doing this procedure, copy the token from the result of GET-request
+performed in http-file **auth.http**. Then you can test the endpoints.
 
 ## 6. Local deployment using docker
 If you want to deploy the application locally using a docker container, you can use docker commands to perform that.

@@ -8,7 +8,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzO
 {
   "campaignId": null,
   "campaignFolderId": null,
-  "title": "Construction Product Campaign 000001",
+  "title": "Construction Product Campaign 000004",
   "startDate": "2024-07-13T15:28:36.000+00:00",
   "endDate": "2024-08-04T18:11:16.000+00:00",
   "type": 9001,
@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMTQ4MzIiLCJpYXQiOjE2OTEzO
   "appTitle": "Construction Products App",
   "appImageUrl": "app_image.jpg",
   "appSummary": "Explore and purchase construction products on the go. Get exclusive discounts and offers!",
-  "relativeUrl": null,
+  "relativeUrl": "campaign-actie/page",
   "campaignItems": [
     {
       "campaignItemId": null,
