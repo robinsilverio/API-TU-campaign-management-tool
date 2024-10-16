@@ -1,11 +1,14 @@
 package com.example.tu_campaign_management_tool_api.controllers;
 
 import com.example.tu_campaign_management_tool_api.payload.request.LoginRequest;
+import com.example.tu_campaign_management_tool_api.payload.responses.ErrorResponse;
 import com.example.tu_campaign_management_tool_api.payload.responses.JwtResponse;
+import com.example.tu_campaign_management_tool_api.payload.responses.RolesResponse;
 import com.example.tu_campaign_management_tool_api.security.jwt.JwtUtils;
 import com.example.tu_campaign_management_tool_api.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,6 +49,15 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 roles));
+    }
+
+    @GetMapping("/validateJwt")
+    public ResponseEntity<?> validateJwtToken(@RequestParam String paramToken) {
+        if (jwtUtils.validateJwtToken(paramToken)) {
+            return ResponseEntity.ok(new RolesResponse(jwtUtils.getRolesFromJwtToken(paramToken)));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Invalid Token"));
+        }
     }
 
 }
