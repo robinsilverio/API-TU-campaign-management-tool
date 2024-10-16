@@ -26,11 +26,7 @@ public class NextIdGenerator implements IdentifierGenerator {
     }
 
     private boolean hasReachedTheMaximum(long id) {
-        boolean hasReached = false;
-        if (id == (long) Math.pow(10, startingStringLength) - 1) {
-            hasReached = true;
-        }
-        return hasReached;
+        return id == (long) Math.pow(10, startingStringLength) - 1;
     }
 
     @Override

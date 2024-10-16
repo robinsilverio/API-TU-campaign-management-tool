@@ -9,8 +9,10 @@ import com.example.tu_campaign_management_tool_api.repositories.CampaignReposito
 import com.example.tu_campaign_management_tool_api.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -38,12 +40,16 @@ public class DatabaseInitializer {
         final int AMOUNT_OF_CAMPAIGNS = 3;
 
         for (int i = 0; i < AMOUNT_OF_CAMPAIGNS; i++) {
+
+            LocalDateTime dateNow = LocalDateTime.now();
+            Date startDate = Date.from(dateNow.plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+            Date endDate = Date.from(dateNow.plusDays(10).atZone(ZoneId.systemDefault()).toInstant());
             Campaign campaign = new Campaign(
                     null,
                     null,
                     "Construction Product Campaign 00000" + (i + 1),
-                    Date.from(LocalDateTime.of(2024, 7, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
-                    Date.from(LocalDateTime.of(2024, 8, 20, 10, 30, 0).atZone(ZoneId.systemDefault()).toInstant()),
+                    startDate,
+                    endDate,
                     9001,
                     "Shop now for a wide range of construction products at discounted prices. Limited stock available!",
                     "Save Big on Construction Products",
